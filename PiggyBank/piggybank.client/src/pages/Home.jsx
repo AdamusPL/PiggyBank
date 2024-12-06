@@ -1,5 +1,5 @@
 import logo from '/images/logo.png'
-import './Home.css'
+import '../css/Home.css'
 
 export function Home() {
     return (

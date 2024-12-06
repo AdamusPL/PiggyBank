@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import { Layout } from './Layout';
-import { Home } from './Home';
-import { Expenses } from './Expenses';
-import { Login } from './Login';
-import { Register } from './Register';
-import { Rooms } from './Rooms';
-import { Profile } from './Profile'
+import { Layout } from './components/Layout';
+import { Home } from './pages/Home';
+import { Expenses } from './pages/Expenses';
+import { Login } from './pages/Login';
+import { Register } from './pages/Register';
+import { Rooms } from './pages/Rooms';
+import { Profile } from './pages/Profile'
 function App() {
     return (
         <>

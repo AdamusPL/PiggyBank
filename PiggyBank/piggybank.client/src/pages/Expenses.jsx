@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import './Expenses.css';
+import '../css/Expenses.css';
 import { React } from 'react';
 
 export function Expenses() {
@@ -30,6 +30,8 @@ export function Expenses() {
         const data = await response.json();
         const sortedData = {};
 
+        debugger;
+
         data.forEach(item => {
             if (!sortedData[item.roomId]) {
                 sortedData[item.roomId] = {
@@ -51,48 +53,50 @@ export function Expenses() {
             });
         });
         setUserRooms(sortedData);
+        console.log(sortedData);
     }
 
     const handleSubmitItem = async (roomId, expenseId, item) => {
+        debugger;
         if (userRooms.hasOwnProperty(roomId)) {
             const expensesArray = userRooms[roomId].expenses;
             if (expensesArray.hasOwnProperty(expenseId)) {
                 const itemsArray = expensesArray[expenseId];
 
-                    try {
-                        const itemToAdd = {
-                            Name: item.name,
-                            Price: item.price,
-                            ExpenseId: expenseId
-                        };
+                try {
+                    const itemToAdd = {
+                        Name: item.name,
+                        Price: item.price,
+                        ExpenseId: expenseId
+                    };
 
-                        const response = await fetch('items/AddItem', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(itemToAdd),
+                    const response = await fetch('items/AddItem', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(itemToAdd),
+                    });
+
+                    const result = await response.json();
+
+                    //debugger;
+                    if (response.ok) {
+                        // Push the new item to the expense list
+                        itemsArray.items.push({
+                            itemName: item.name,
+                            itemPrice: parseFloat(item.price),
+                            itemId: result.id,
+                            roomId: roomId,
+                            expenseId: expenseId
                         });
-
-                        const result = await response.json();
-                        
-                        //debugger;
-                        if (response.ok) {
-                            // Push the new item to the expense list
-                            itemsArray.items.push({
-                                itemName: item.name,
-                                itemPrice: parseFloat(item.price),
-                                itemId: result.id,
-                                roomId: roomId,
-                                expenseId: expenseId
-                            });
-                            setUserRooms({ ...userRoomsRef.current });
-                        } else {
-                            console.error('Failed to add item');
-                        }
-                    } catch (error) {
-                        console.error('Error:', error);
+                        setUserRooms({ ...userRoomsRef.current });
+                    } else {
+                        console.error('Failed to add item');
                     }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
             }
         } else {
             console.error('Room not found');
@@ -111,35 +115,35 @@ export function Expenses() {
     const handleSubmitExpense = async (roomId, expense) => {
         if (userRooms.hasOwnProperty(roomId)) {
             const expensesArray = userRooms[roomId].expenses;
-                try {
-                    const expenseToAdd = {
-                        Name: expense.name,
-                        PurchaseDate: expense.purchaseDate,
-                        RoomId: roomId
+            try {
+                const expenseToAdd = {
+                    Name: expense.name,
+                    PurchaseDate: expense.purchaseDate,
+                    RoomId: roomId
+                };
+
+                const response = await fetch('items/AddExpense', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(expenseToAdd),
+                });
+
+                const newExpenseId = await response.json();
+
+                if (response.ok) {
+                    expensesArray[newExpenseId.id] = {
+                        expenseName: expense.name,
+                        items: []
                     };
-
-                    const response = await fetch('items/AddExpense', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(expenseToAdd),
-                    });
-
-                    const newExpenseId = await response.json();
-
-                    if (response.ok) {
-                        expensesArray[newExpenseId.id] = {
-                            expenseName: expense.name,
-                            items: []
-                        };
-                        setUserRooms({ ...userRoomsRef.current });
-                    } else {
-                        console.error('Failed to add expense');
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
+                    setUserRooms({ ...userRoomsRef.current });
+                } else {
+                    console.error('Failed to add expense');
                 }
+            } catch (error) {
+                console.error('Error:', error);
+            }
         } else {
             console.error('Room not found');
         }
@@ -184,7 +188,7 @@ export function Expenses() {
         }
         return sum;
     }
-    
+
     const removeItem = async (roomId, expenseId, item) => {
         try {
             const itemToRemove = {
@@ -249,55 +253,55 @@ export function Expenses() {
                 <tbody>
                     {Object.keys(userRooms).length > 0 ? (
                         Object.keys(userRooms).map(roomId => (
-                        <div className="h-100 p-5 bg-body-tertiary border rounded-3" key={roomId}>
-                            <h2>{userRooms[roomId].roomName}</h2>
-                            {Object.keys(userRooms[roomId].expenses).length > 0 ? (
-                                Object.keys(userRooms[roomId].expenses).map(expenseId => (
-                                <div className="h-100 p-5 bg-body-tertiary border rounded-3" key={expenseId}>
-                                    <div className="one-row">
-                                        <h3>{userRooms[roomId].expenses[expenseId].expenseName}</h3>
-                                        <button className="btn btn-outline-secondary" type="button" onClick={() => removeExpense(roomId, expenseId)}>X</button>
-                                    </div>
-                                    <div>
-                                        {userRooms[roomId].expenses[expenseId].items.length > 0 ? (
-                                            userRooms[roomId].expenses[expenseId].items.map((item, itemIndex) => (
-                                                <div className="one-row" key={itemIndex}>
-                                                    {item.itemName !== null ? (
-                                                        <>
-                                                            <p>{item.itemName}: {item.itemPrice}</p>
-                                                            <button className="btn btn-outline-secondary" type="button" onClick={() => removeItem(roomId, expenseId, item)}>X</button>
-                                                        </>
-                                                    ) : (
-                                                        <p>No items</p>
-                                                    )}
-                                                </div>
-                                            ))
-                                        ) : (
-                                            <p>No items</p>
-                                        )}
-                                        <p>Summary price of items: {countSumOfItems(roomId, expenseId)()}</p>
-                                    </div>
+                            <div className="h-100 p-5 bg-body-tertiary border rounded-3" key={roomId}>
+                                <h2>{userRooms[roomId].roomName}</h2>
+                                {Object.keys(userRooms[roomId].expenses).length > 0 ? (
+                                    Object.keys(userRooms[roomId].expenses).map(expenseId => (
+                                        <div className="h-100 p-5 bg-body-tertiary border rounded-3" key={expenseId}>
+                                            <div className="one-row">
+                                                <h3>{userRooms[roomId].expenses[expenseId].expenseName}</h3>
+                                                <button className="btn btn-outline-secondary" type="button" onClick={() => removeExpense(roomId, expenseId)}>X</button>
+                                            </div>
+                                            <div>
+                                                {userRooms[roomId].expenses[expenseId].items.length > 0 ? (
+                                                    userRooms[roomId].expenses[expenseId].items.map((item, itemIndex) => (
+                                                        <div className="one-row" key={itemIndex}>
+                                                            {item.itemName !== null ? (
+                                                                <>
+                                                                    <p>{item.itemName}: {item.itemPrice}</p>
+                                                                    <button className="btn btn-outline-secondary" type="button" onClick={() => removeItem(roomId, expenseId, item)}>X</button>
+                                                                </>
+                                                            ) : (
+                                                                <p>No items</p>
+                                                            )}
+                                                        </div>
+                                                    ))
+                                                ) : (
+                                                    <p>No items</p>
+                                                )}
+                                                <p>Summary price of items: {() => countSumOfItems(roomId, expenseId)}</p>
+                                            </div>
 
-                                    <h3>Add new item</h3>
-                                    <div className="new-items">
-                                        <form className="item-form" onSubmit={handleFormItemSubmit(roomId, expenseId)}>
-                                            <p>Name</p>
-                                            <input type="search" onChange={(e) => setItemName(e.target.value)} />
-                                            <p>Price</p>
-                                            <input type="search" onChange={(e) => setItemPrice(e.target.value)} />
-                                            <button className="btn btn-outline-secondary" type="submit">Add</button>
-                                        </form>
-                                    </div>
-                                </div>
-                                ))
+                                            <h3>Add new item</h3>
+                                            <div className="new-items">
+                                                <form className="item-form" onSubmit={() => handleFormItemSubmit(roomId, expenseId)}>
+                                                    <p>Name</p>
+                                                    <input type="search" onChange={(e) => setItemName(e.target.value)} />
+                                                    <p>Price</p>
+                                                    <input type="search" onChange={(e) => setItemPrice(e.target.value)} />
+                                                    <button className="btn btn-outline-secondary" type="submit">Add</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    ))
                                 ) : (
                                     <p>No expenses</p>
                                 )}
-                                <p>Summary of room expenses: {countSumOfExpenses(roomId)()}</p>
-                            
+                                <p>Summary of room expenses: {() => countSumOfExpenses(roomId)}</p>
+
                                 <div className="new-expenses">
                                     <h3>Add new expense</h3>
-                                    <form className="expense-form" onSubmit={handleFormExpenseSubmit(roomId)}>
+                                    <form className="expense-form" onSubmit={() => handleFormExpenseSubmit(roomId)}>
                                         <p>Name</p>
                                         <input type="search" onChange={(e) => setExpenseName(e.target.value)} />
                                         <p>Purchase Date</p>
@@ -305,11 +309,11 @@ export function Expenses() {
                                         <button className="btn btn-outline-secondary" type="submit">Add</button>
                                     </form>
                                 </div>
-                        </div>
+                            </div>
                         ))
-                ) : (
-                    <p>No rooms</p>
-                )}
+                    ) : (
+                        <p>No rooms</p>
+                    )}
                 </tbody>
             </table>
         </div>
