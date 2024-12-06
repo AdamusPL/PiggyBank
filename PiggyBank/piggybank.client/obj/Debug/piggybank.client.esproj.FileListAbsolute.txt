@@ -1,1 +1,0 @@
-C:\Users\adamc\Documents\GitHub\PiggyBank\PiggyBank\piggybank.client\obj\Debug\piggybank.client.esproj.CoreCompileInputs.cache
