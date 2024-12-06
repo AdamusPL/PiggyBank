@@ -3,7 +3,7 @@
 "ServerUrl": "https://localhost:5173",
 "RedirectUrl": "",
 "LaunchCommand": "npm run dev",
-"WorkingDirectory": "C:\\Users\\adamc\\Documents\\GitHub\\Skarbonka\\PiggyBank\\PiggyBank.Server\\..\\piggybank.client",
+"WorkingDirectory": "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\PiggyBank.Server\\..\\piggybank.client",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }

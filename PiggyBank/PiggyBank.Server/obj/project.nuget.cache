@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "BPRa20ZPWiI=",
+  "dgSpecHash": "DujERwLzpsY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\adamc\\Documents\\GitHub\\Skarbonka\\PiggyBank\\PiggyBank.Server\\PiggyBank.Server.csproj",
+  "projectFilePath": "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\PiggyBank.Server\\PiggyBank.Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\adamc\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\adamc\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
-    "C:\\Users\\adamc\\.nuget\\packages\\microsoft.aspnetcore.spaproxy\\8.0.6\\microsoft.aspnetcore.spaproxy.8.0.6.nupkg.sha512",
+    "C:\\Users\\adamc\\.nuget\\packages\\microsoft.aspnetcore.spaproxy\\8.0.11\\microsoft.aspnetcore.spaproxy.8.0.11.nupkg.sha512",
     "C:\\Users\\adamc\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\adamc\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\adamc\\.nuget\\packages\\microsoft.data.sqlclient\\5.1.5\\microsoft.data.sqlclient.5.1.5.nupkg.sha512",

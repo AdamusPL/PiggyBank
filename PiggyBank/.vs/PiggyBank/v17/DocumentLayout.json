@@ -1,26 +1,42 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\adamc\\Documents\\GitHub\\Skarbonka\\PiggyBank\\",
+  "WorkspaceRootPath": "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{67CCB619-F039-4139-B4FF-250BE7B42458}|piggybank.client\\piggybank.client.esproj|c:\\users\\adamc\\documents\\github\\skarbonka\\piggybank\\piggybank.client\\src\\expenses.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{67CCB619-F039-4139-B4FF-250BE7B42458}|piggybank.client\\piggybank.client.esproj|solutionrelative:piggybank.client\\src\\expenses.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6715BEE8-8ECE-4501-97A6-6D2210BCA203}|PiggyBank.Server\\PiggyBank.Server.csproj|c:\\users\\adamc\\documents\\github\\skarbonka\\piggybank\\piggybank.server\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6715BEE8-8ECE-4501-97A6-6D2210BCA203}|PiggyBank.Server\\PiggyBank.Server.csproj|solutionrelative:piggybank.server\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6715BEE8-8ECE-4501-97A6-6D2210BCA203}|PiggyBank.Server\\PiggyBank.Server.csproj|c:\\users\\adamc\\documents\\github\\skarbonka\\piggybank\\piggybank.server\\repositories\\itemsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6715BEE8-8ECE-4501-97A6-6D2210BCA203}|PiggyBank.Server\\PiggyBank.Server.csproj|solutionrelative:piggybank.server\\repositories\\itemsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6715BEE8-8ECE-4501-97A6-6D2210BCA203}|PiggyBank.Server\\PiggyBank.Server.csproj|c:\\users\\adamc\\documents\\github\\skarbonka\\piggybank\\piggybank.server\\controllers\\itemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{6715BEE8-8ECE-4501-97A6-6D2210BCA203}|PiggyBank.Server\\PiggyBank.Server.csproj|c:\\users\\adamc\\documents\\github\\piggybank\\piggybank\\piggybank.server\\controllers\\itemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6715BEE8-8ECE-4501-97A6-6D2210BCA203}|PiggyBank.Server\\PiggyBank.Server.csproj|solutionrelative:piggybank.server\\controllers\\itemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6715BEE8-8ECE-4501-97A6-6D2210BCA203}|PiggyBank.Server\\PiggyBank.Server.csproj|c:\\users\\adamc\\documents\\github\\skarbonka\\piggybank\\piggybank.server\\services\\itemsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6715BEE8-8ECE-4501-97A6-6D2210BCA203}|PiggyBank.Server\\PiggyBank.Server.csproj|solutionrelative:piggybank.server\\services\\itemsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6715BEE8-8ECE-4501-97A6-6D2210BCA203}|PiggyBank.Server\\PiggyBank.Server.csproj|c:\\users\\adamc\\documents\\github\\piggybank\\piggybank\\piggybank.server\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6715BEE8-8ECE-4501-97A6-6D2210BCA203}|PiggyBank.Server\\PiggyBank.Server.csproj|solutionrelative:piggybank.server\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6715BEE8-8ECE-4501-97A6-6D2210BCA203}|PiggyBank.Server\\PiggyBank.Server.csproj|c:\\users\\adamc\\documents\\github\\piggybank\\piggybank\\piggybank.server\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{6715BEE8-8ECE-4501-97A6-6D2210BCA203}|PiggyBank.Server\\PiggyBank.Server.csproj|solutionrelative:piggybank.server\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6715BEE8-8ECE-4501-97A6-6D2210BCA203}|PiggyBank.Server\\PiggyBank.Server.csproj|c:\\users\\adamc\\documents\\github\\piggybank\\piggybank\\piggybank.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6715BEE8-8ECE-4501-97A6-6D2210BCA203}|PiggyBank.Server\\PiggyBank.Server.csproj|solutionrelative:piggybank.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6715BEE8-8ECE-4501-97A6-6D2210BCA203}|PiggyBank.Server\\PiggyBank.Server.csproj|c:\\users\\adamc\\documents\\github\\piggybank\\piggybank\\piggybank.server\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6715BEE8-8ECE-4501-97A6-6D2210BCA203}|PiggyBank.Server\\PiggyBank.Server.csproj|solutionrelative:piggybank.server\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6715BEE8-8ECE-4501-97A6-6D2210BCA203}|PiggyBank.Server\\PiggyBank.Server.csproj|c:\\users\\adamc\\documents\\github\\piggybank\\piggybank\\piggybank.server\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6715BEE8-8ECE-4501-97A6-6D2210BCA203}|PiggyBank.Server\\PiggyBank.Server.csproj|solutionrelative:piggybank.server\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6715BEE8-8ECE-4501-97A6-6D2210BCA203}|PiggyBank.Server\\PiggyBank.Server.csproj|c:\\users\\adamc\\documents\\github\\piggybank\\piggybank\\piggybank.server\\services\\roomsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6715BEE8-8ECE-4501-97A6-6D2210BCA203}|PiggyBank.Server\\PiggyBank.Server.csproj|solutionrelative:piggybank.server\\services\\roomsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{67CCB619-F039-4139-B4FF-250BE7B42458}|piggybank.client\\piggybank.client.esproj|c:\\users\\adamc\\documents\\github\\piggybank\\piggybank\\piggybank.client\\src\\app.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{67CCB619-F039-4139-B4FF-250BE7B42458}|piggybank.client\\piggybank.client.esproj|solutionrelative:piggybank.client\\src\\app.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{67CCB619-F039-4139-B4FF-250BE7B42458}|piggybank.client\\piggybank.client.esproj|c:\\users\\adamc\\documents\\github\\piggybank\\piggybank\\piggybank.client\\src\\expenses.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{67CCB619-F039-4139-B4FF-250BE7B42458}|piggybank.client\\piggybank.client.esproj|solutionrelative:piggybank.client\\src\\expenses.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,24 +51,12 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{80c411e8-fd5e-4b16-914b-0d9d84172cc1}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{c9c0ae26-aa77-11d2-b3f0-0000f87570ee}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             }
           ]
         },
         {
           "DockedWidth": 322,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -60,66 +64,114 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DbContext.cs",
-              "DocumentMoniker": "C:\\Users\\adamc\\Documents\\GitHub\\Skarbonka\\PiggyBank\\PiggyBank.Server\\DbContext.cs",
-              "RelativeDocumentMoniker": "PiggyBank.Server\\DbContext.cs",
-              "ToolTip": "C:\\Users\\adamc\\Documents\\GitHub\\Skarbonka\\PiggyBank\\PiggyBank.Server\\DbContext.cs",
-              "RelativeToolTip": "PiggyBank.Server\\DbContext.cs",
-              "ViewState": "AQIAADYAAAAAAAAAAADgv0IAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-25T11:28:13.229Z",
+              "DocumentIndex": 2,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\PiggyBank.Server\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "PiggyBank.Server\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\PiggyBank.Server\\Properties\\launchSettings.json",
+              "RelativeToolTip": "PiggyBank.Server\\Properties\\launchSettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACAAAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-12-05T23:29:26.575Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ItemsRepository.cs",
-              "DocumentMoniker": "C:\\Users\\adamc\\Documents\\GitHub\\Skarbonka\\PiggyBank\\PiggyBank.Server\\Repositories\\ItemsRepository.cs",
-              "RelativeDocumentMoniker": "PiggyBank.Server\\Repositories\\ItemsRepository.cs",
-              "ToolTip": "C:\\Users\\adamc\\Documents\\GitHub\\Skarbonka\\PiggyBank\\PiggyBank.Server\\Repositories\\ItemsRepository.cs",
-              "RelativeToolTip": "PiggyBank.Server\\Repositories\\ItemsRepository.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAvwBYAAAAQAAAA",
+              "DocumentIndex": 1,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\PiggyBank.Server\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "PiggyBank.Server\\Controllers\\UsersController.cs",
+              "ToolTip": "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\PiggyBank.Server\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "PiggyBank.Server\\Controllers\\UsersController.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAAYwBsAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-25T11:27:39.081Z",
+              "WhenOpened": "2024-12-05T23:08:07.224Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "RoomsService.cs",
+              "DocumentMoniker": "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\PiggyBank.Server\\Services\\RoomsService.cs",
+              "RelativeDocumentMoniker": "PiggyBank.Server\\Services\\RoomsService.cs",
+              "ToolTip": "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\PiggyBank.Server\\Services\\RoomsService.cs",
+              "RelativeToolTip": "PiggyBank.Server\\Services\\RoomsService.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAgwBAAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-05T23:03:13.117Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DbContext.cs",
+              "DocumentMoniker": "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\PiggyBank.Server\\DbContext.cs",
+              "RelativeDocumentMoniker": "PiggyBank.Server\\DbContext.cs",
+              "ToolTip": "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\PiggyBank.Server\\DbContext.cs",
+              "RelativeToolTip": "PiggyBank.Server\\DbContext.cs",
+              "ViewState": "AQIAACgAAAAAAAAAAADwvyoAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-05T23:02:09.236Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "App.jsx",
+              "DocumentMoniker": "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\piggybank.client\\src\\App.jsx",
+              "RelativeDocumentMoniker": "piggybank.client\\src\\App.jsx",
+              "ToolTip": "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\piggybank.client\\src\\App.jsx",
+              "RelativeToolTip": "piggybank.client\\src\\App.jsx",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-12-05T22:53:41.246Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\PiggyBank.Server\\Program.cs",
+              "RelativeDocumentMoniker": "PiggyBank.Server\\Program.cs",
+              "ToolTip": "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\PiggyBank.Server\\Program.cs",
+              "RelativeToolTip": "PiggyBank.Server\\Program.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAABUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-27T16:33:56.307Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Expenses.jsx",
+              "DocumentMoniker": "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\piggybank.client\\src\\Expenses.jsx",
+              "RelativeDocumentMoniker": "piggybank.client\\src\\Expenses.jsx",
+              "ToolTip": "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\piggybank.client\\src\\Expenses.jsx",
+              "RelativeToolTip": "piggybank.client\\src\\Expenses.jsx",
+              "ViewState": "AQIAAAwBAAAAAAAAAADgvxUBAABBAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-06-25T11:02:28.283Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ItemsController.cs",
+              "DocumentMoniker": "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\PiggyBank.Server\\Controllers\\ItemsController.cs",
+              "RelativeDocumentMoniker": "PiggyBank.Server\\Controllers\\ItemsController.cs",
+              "ToolTip": "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\PiggyBank.Server\\Controllers\\ItemsController.cs",
+              "RelativeToolTip": "PiggyBank.Server\\Controllers\\ItemsController.cs",
+              "ViewState": "AQIAAEMAAAAAAAAAAAAQwE0AAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-25T11:01:25.709Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "ItemsService.cs",
-              "DocumentMoniker": "C:\\Users\\adamc\\Documents\\GitHub\\Skarbonka\\PiggyBank\\PiggyBank.Server\\Services\\ItemsService.cs",
-              "RelativeDocumentMoniker": "PiggyBank.Server\\Services\\ItemsService.cs",
-              "ToolTip": "C:\\Users\\adamc\\Documents\\GitHub\\Skarbonka\\PiggyBank\\PiggyBank.Server\\Services\\ItemsService.cs",
-              "RelativeToolTip": "PiggyBank.Server\\Services\\ItemsService.cs",
-              "ViewState": "AQIAABwAAAAAAAAAAADgvysAAAAJAAAA",
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\PiggyBank.Server\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "PiggyBank.Server\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\PiggyBank.Server\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "PiggyBank.Server\\Controllers\\HomeController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-25T11:27:14.882Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Expenses.jsx",
-              "DocumentMoniker": "C:\\Users\\adamc\\Documents\\GitHub\\Skarbonka\\PiggyBank\\piggybank.client\\src\\Expenses.jsx",
-              "RelativeDocumentMoniker": "piggybank.client\\src\\Expenses.jsx",
-              "ToolTip": "C:\\Users\\adamc\\Documents\\GitHub\\Skarbonka\\PiggyBank\\piggybank.client\\src\\Expenses.jsx",
-              "RelativeToolTip": "piggybank.client\\src\\Expenses.jsx",
-              "ViewState": "AQIAAAwBAAAAAAAAAADgvxUBAABBAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
-              "WhenOpened": "2024-06-25T11:02:28.283Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ItemsController.cs",
-              "DocumentMoniker": "C:\\Users\\adamc\\Documents\\GitHub\\Skarbonka\\PiggyBank\\PiggyBank.Server\\Controllers\\ItemsController.cs",
-              "RelativeDocumentMoniker": "PiggyBank.Server\\Controllers\\ItemsController.cs",
-              "ToolTip": "C:\\Users\\adamc\\Documents\\GitHub\\Skarbonka\\PiggyBank\\PiggyBank.Server\\Controllers\\ItemsController.cs",
-              "RelativeToolTip": "PiggyBank.Server\\Controllers\\ItemsController.cs",
-              "ViewState": "AQIAACsAAAAAAAAAAAAkwDQAAAArAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-25T11:01:25.709Z"
+              "WhenOpened": "2024-12-05T23:07:41.427Z"
             }
           ]
         },

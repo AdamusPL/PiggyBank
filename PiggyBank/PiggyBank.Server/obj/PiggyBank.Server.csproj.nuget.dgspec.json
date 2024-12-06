@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\adamc\\Documents\\GitHub\\Skarbonka\\PiggyBank\\PiggyBank.Server\\PiggyBank.Server.csproj": {}
+    "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\PiggyBank.Server\\PiggyBank.Server.csproj": {}
   },
   "projects": {
-    "C:\\Users\\adamc\\Documents\\GitHub\\Skarbonka\\PiggyBank\\PiggyBank.Server\\PiggyBank.Server.csproj": {
+    "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\PiggyBank.Server\\PiggyBank.Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\adamc\\Documents\\GitHub\\Skarbonka\\PiggyBank\\PiggyBank.Server\\PiggyBank.Server.csproj",
+        "projectUniqueName": "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\PiggyBank.Server\\PiggyBank.Server.csproj",
         "projectName": "PiggyBank.Server",
-        "projectPath": "C:\\Users\\adamc\\Documents\\GitHub\\Skarbonka\\PiggyBank\\PiggyBank.Server\\PiggyBank.Server.csproj",
+        "projectPath": "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\PiggyBank.Server\\PiggyBank.Server.csproj",
         "packagesPath": "C:\\Users\\adamc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\adamc\\Documents\\GitHub\\Skarbonka\\PiggyBank\\PiggyBank.Server\\obj\\",
+        "outputPath": "C:\\Users\\adamc\\Documents\\GitHub\\PiggyBank\\PiggyBank\\PiggyBank.Server\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

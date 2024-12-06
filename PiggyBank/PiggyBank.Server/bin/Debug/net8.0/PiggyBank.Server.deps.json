@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v8.0": {
       "PiggyBank.Server/1.0.0": {
         "dependencies": {
-          "Microsoft.AspNetCore.SpaProxy": "8.0.6",
+          "Microsoft.AspNetCore.SpaProxy": "8.0.11",
           "Microsoft.EntityFrameworkCore": "8.0.6",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.6",
           "Swashbuckle.AspNetCore": "6.4.0"
@@ -51,11 +51,11 @@
           }
         }
       },
-      "Microsoft.AspNetCore.SpaProxy/8.0.6": {
+      "Microsoft.AspNetCore.SpaProxy/8.0.11": {
         "runtime": {
           "lib/net8.0/Microsoft.AspNetCore.SpaProxy.dll": {
-            "assemblyVersion": "8.0.6.0",
-            "fileVersion": "8.0.624.26909"
+            "assemblyVersion": "8.0.11.0",
+            "fileVersion": "8.0.1124.52116"
           }
         }
       },
@@ -583,12 +583,12 @@
       "path": "azure.identity/1.10.3",
       "hashPath": "azure.identity.1.10.3.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.SpaProxy/8.0.6": {
+    "Microsoft.AspNetCore.SpaProxy/8.0.11": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-LBIMKEYxs06TJi/7ekqbfJ8VuoBqC3EORy+mw7Xp0gDIdDGhuaKkeT8BWIzetBbGVix4Tpn3k9GEdJ8Z7E7YOw==",
-      "path": "microsoft.aspnetcore.spaproxy/8.0.6",
-      "hashPath": "microsoft.aspnetcore.spaproxy.8.0.6.nupkg.sha512"
+      "sha512": "sha512-jwE/cg81t/FTZF1DOKpd90ztzZz6NNNHdo+vLUL4I2IzqL3e8Coo+2eR0KeD4ShbJm+3LNPXH9a6gYv/oP+aQQ==",
+      "path": "microsoft.aspnetcore.spaproxy/8.0.11",
+      "hashPath": "microsoft.aspnetcore.spaproxy.8.0.11.nupkg.sha512"
     },
     "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
       "type": "package",
