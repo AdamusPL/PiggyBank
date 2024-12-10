@@ -11,16 +11,9 @@ namespace PiggyBank.Controllers
     public class ItemsController : Controller
     {
         private readonly IItemsService _itemsService;
-        public ItemsController(IItemsService itemsService) 
+        public ItemsController(IItemsService itemsService)
         {
             _itemsService = itemsService;
-        }
-
-        [HttpGet("GetItems", Name = "GetItems")]
-        public IEnumerable<Item> Get()
-        {
-            IEnumerable<Item> items = _itemsService.GetItems();
-            return items;
         }
 
         [HttpGet("GetRoomExpenses", Name = "GetRoomExpenses")]
@@ -31,59 +24,32 @@ namespace PiggyBank.Controllers
         }
 
         [HttpPost("AddItem", Name = "AddItem")]
-        public IActionResult AddItem([FromBody] Item item)
+        public IActionResult AddItem([FromBody] ItemDto itemDto)
         {
-            if (item != null)
-            {
-                int id = _itemsService.AddItem(item);
-                return Ok(new { id = id });
-            }
-            else
-            {
-                return BadRequest();
-            }
+            int id = _itemsService.AddItem(itemDto);
+            return Ok(new { id = id });
         }
 
         [HttpPost("AddExpense", Name = "AddExpense")]
-        public IActionResult AddExpense([FromBody] Expense expense)
+        public IActionResult AddExpense([FromBody] ExpenseDto expenseDto)
         {
-            if (expense != null)
-            {
-                int id = _itemsService.AddExpense(expense);
-                return Ok(new { id = id });
-            }
-            else
-            {
-                return BadRequest("Invalid request");
-            }
+            int id = _itemsService.AddExpense(expenseDto);
+            return Ok(new { id = id });
+
         }
 
         [HttpPost("RemoveItem", Name = "RemoveItem")]
-        public IActionResult RemoveItem([FromBody] Item item)
+        public IActionResult RemoveItem([FromQuery] int itemId)
         {
-            if (item != null)
-            {
-                _itemsService.RemoveItem(item);
-                return Ok(new { message = "Successfully removed item" });
-            }
-            else
-            {
-                return BadRequest();
-            }
+            _itemsService.RemoveItem(itemId);
+            return Ok(new { message = "Successfully removed item" });
         }
 
         [HttpPost("RemoveExpense", Name = "RemoveExpense")]
         public IActionResult RemoveExpense([FromQuery] int expenseId)
         {
-            if (expenseId != null)
-            {
-                _itemsService.RemoveExpense(expenseId);
-                return Ok(new { message = "Successfully removed item" });
-            }
-            else
-            {
-                return BadRequest();
-            }
+            _itemsService.RemoveExpense(expenseId);
+            return Ok(new { message = "Successfully removed item" });
         }
 
     }

@@ -6,48 +6,41 @@ namespace PiggyBank.Repositories
 {
     internal interface IItemsRepository
     {
-        List<Item> GetItems();
-        int AddItem(Item item);
-        int AddExpense(Expense expense);
-        void RemoveItem(Item item);
+        int AddItem(ItemDto itemDto);
+        int AddExpense(ExpenseDto expenseDto);
+        void RemoveItem(int itemId);
         void RemoveExpense(int expenseId);
     }
 
     internal class ItemsRepository : IItemsRepository
     {
-        public List<Item> GetItems()
-        {
-            using (var dbContext = new DbContext())
-            {
-                return dbContext.Item.ToList();
-            }
-        }
-
-        public int AddItem(Item item)
+        public int AddItem(ItemDto itemDto)
         {
             int id;
             using (var dbContext = new DbContext())
             {
-                id = dbContext.AddItem(item);
+                id = dbContext.AddItem(itemDto);
             }
             return id;
         }
 
-        public int AddExpense(Expense expense)
+        public int AddExpense(ExpenseDto expenseDto)
         {
             int id;
             using (var dbContext = new DbContext())
             {
-                id = dbContext.AddExpense(expense);
+                id = dbContext.AddExpense(expenseDto);
             }
             return id;
         }
 
-        public void RemoveItem(Item item)
+        public void RemoveItem(int itemId)
         {
             using (var dbContext = new DbContext())
             {
-                dbContext.RemoveItem(item);
+                var entity = dbContext.Item.Find(itemId);
+                dbContext.Item.Remove(entity);
+                dbContext.SaveChanges();
             }
         }
 

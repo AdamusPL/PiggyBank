@@ -1,14 +1,12 @@
-﻿namespace PiggyBank.Server.Dtos
+﻿using PiggyBank.Server.Models;
+
+namespace PiggyBank.Server.Dtos
 {
     public class RoomExpenseDto
     {
-        public int RoomId { get; set; }
-        public string RoomName { get; set; }
-        public int? ExpenseId { get; set; }
-        public string? ExpenseName { get; set; }
-        public DateTime? PurchaseDate { get; set; }
-        public string? ItemName { get; set; }
-        public double? ItemPrice { get; set; }
-        public int? ItemId { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public ICollection<Expense> Expenses { get; set; }
+        public ICollection<RoomUser> RoomUsers { get; set; }
     }
 }

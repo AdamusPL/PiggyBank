@@ -8,11 +8,10 @@ namespace PiggyBank.Services
 {
     public interface IItemsService
     {
-        List<Item> GetItems();
         List<Room> GetRoomExpenses(int roomUserId);
-        int AddItem(Item item);
-        int AddExpense(Expense expense);
-        void RemoveItem(Item item);
+        int AddItem(ItemDto itemDto);
+        int AddExpense(ExpenseDto expenseDto);
+        void RemoveItem(int itemId);
         void RemoveExpense(int expenseId);
     }
 
@@ -23,36 +22,31 @@ namespace PiggyBank.Services
             _itemsRepository = itemsRepository;
         }
 
-        public List<Item> GetItems()
-        {
-            return _itemsRepository.GetItems(); 
-        }
-
         public List<Room> GetRoomExpenses(int roomUserId)
         {
             using (var context = new DbContext())
             {
                 return context.Room
-                    .Where(r => r.RoomUsers.Any(ru => ru.Id == roomUserId))
+                    .Where(r => r.Room_RoomUsers.Any(ru => ru.RoomUserId == roomUserId))
                     .Include(r => r.Expenses)
                         .ThenInclude(e => e.Items)
                     .ToList();
             }
         }
 
-        public int AddItem(Item item)
+        public int AddItem(ItemDto itemDto)
         {
-            return _itemsRepository.AddItem(item);
+            return _itemsRepository.AddItem(itemDto);
         }
 
-        public int AddExpense(Expense expense)
+        public int AddExpense(ExpenseDto expenseDto)
         {
-            return _itemsRepository.AddExpense(expense);
+            return _itemsRepository.AddExpense(expenseDto);
         }
 
-        public void RemoveItem(Item item)
+        public void RemoveItem(int itemId)
         {
-            _itemsRepository.RemoveItem(item);
+            _itemsRepository.RemoveItem(itemId);
         }
 
         public void RemoveExpense(int expenseId)

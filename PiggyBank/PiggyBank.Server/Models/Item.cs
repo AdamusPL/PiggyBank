@@ -8,6 +8,12 @@ namespace PiggyBank.Models
         public string Name { get; set; }
         public double Price { get; set; }
         public int ExpenseId { get; set; }
-        public Expense expense { get; set; }
+        //public Expense expense { get; set; }
+
+        public Item(string name, double price, int expenseId) {
+            Name = name;
+            Price = price;
+            ExpenseId = expenseId;
+        }
     }
 }

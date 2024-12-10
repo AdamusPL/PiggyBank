@@ -40,30 +40,26 @@ namespace PiggyBank
             SaveChanges();
         }
 
-        public int AddItem(Item item)
+        public int AddItem(ItemDto itemDto)
         {
+            Item item = new Item(itemDto.Name, itemDto.Price, itemDto.ExpenseId);
             Item.Add(item);
             SaveChanges();
             return item.Id;
         }
 
-        public int AddExpense(Expense expense)
+        public int AddExpense(ExpenseDto expenseDto)
         {
+            Expense expense = new Expense(expenseDto.Name, expenseDto.PurchaseDate, expenseDto.RoomId);
             Expense.Add(expense);
             SaveChanges();
             return expense.Id;
         }
 
-        public void RemoveItem(Item item)
-        {
-            Item.Remove(item);
-            SaveChanges();
-        }
-
         public void RemoveExpense(int expenseId)
         {
             var expense = Expense.Where(e => e.Id == expenseId).FirstOrDefault();
-            var items = Item.Where(i => i.expense.Id == expenseId);
+            var items = Item.Where(i => i.ExpenseId == expenseId);
             if (items != null)
             {
                 foreach (var item in items) {
