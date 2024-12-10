@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PiggyBank.Server.Dtos;
 using PiggyBank.Server.Models;
 using PiggyBank.Server.Services;
 
@@ -35,27 +36,17 @@ namespace PiggyBank.Server.Controllers
         }
 
         [HttpPost("join", Name = "JoinRoom")]
-        public IActionResult JoinRoom([FromBody] Room_RoomUser room_RoomUser)
+        public IActionResult JoinRoom([FromBody] RoomOperationDto roomOperationDto)
         {
-            if (room_RoomUser == null || room_RoomUser.RoomId <= 0 || room_RoomUser.RoomUserId <= 0)
-            {
-                return BadRequest("Invalid request");
-            }
-
-            _roomsService.JoinRoom(room_RoomUser);
+            _roomsService.JoinRoom(roomOperationDto);
 
             return Ok(new { message = "Successfully joined room" });
         }
 
         [HttpPost("leave", Name = "LeaveRoom")]
-        public IActionResult LeaveRoom([FromBody] Room_RoomUser room_RoomUser)
+        public IActionResult LeaveRoom([FromBody] RoomOperationDto roomOperationDto)
         {
-            if (room_RoomUser == null || room_RoomUser.RoomId <= 0 || room_RoomUser.RoomUserId <= 0)
-            {
-                return BadRequest("Invalid request");
-            }
-
-            _roomsService.LeaveRoom(room_RoomUser);
+            _roomsService.LeaveRoom(roomOperationDto);
 
             return Ok(new { message = "Successfully joined room" });
         }

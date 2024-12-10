@@ -1,4 +1,5 @@
 ﻿using PiggyBank.Models;
+using PiggyBank.Server.Dtos;
 using PiggyBank.Server.Models;
 using PiggyBank.Server.Repositories;
 
@@ -7,8 +8,8 @@ namespace PiggyBank.Server.Services
     public interface IRoomsService
     {
         List<Room> GetRooms();
-        void JoinRoom(Room_RoomUser roomRoomUser);
-        void LeaveRoom(Room_RoomUser roomRoomUser);
+        void JoinRoom(RoomOperationDto roomOperationDto);
+        void LeaveRoom(RoomOperationDto roomOperationDto);
         List<Room_RoomUser> GetUserRooms(int userId);
         void CreateRoom(Room room);
     }
@@ -26,14 +27,14 @@ namespace PiggyBank.Server.Services
             return _roomsRepository.GetRooms();
         }
 
-        public void JoinRoom(Room_RoomUser roomRoomUser)
+        public void JoinRoom(RoomOperationDto roomOperationDto)
         {
-            _roomsRepository.JoinRoom(roomRoomUser);
+            _roomsRepository.JoinRoom(roomOperationDto);
         }
 
-        public void LeaveRoom(Room_RoomUser roomRoomUser)
+        public void LeaveRoom(RoomOperationDto roomOperationDto)
         {
-            _roomsRepository.LeaveRoom(roomRoomUser);
+            _roomsRepository.LeaveRoom(roomOperationDto);
         }
 
         public List<Room_RoomUser> GetUserRooms(int userId)

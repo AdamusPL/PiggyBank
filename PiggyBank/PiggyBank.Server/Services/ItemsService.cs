@@ -1,4 +1,5 @@
-﻿using PiggyBank.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using PiggyBank.Models;
 using PiggyBank.Repositories;
 using PiggyBank.Server.Dtos;
 using PiggyBank.Server.Models;
@@ -8,7 +9,7 @@ namespace PiggyBank.Services
     public interface IItemsService
     {
         List<Item> GetItems();
-        List<RoomExpenseDto> GetRoomExpenses(int userId);
+        List<Room> GetRoomExpenses(int roomUserId);
         int AddItem(Item item);
         int AddExpense(Expense expense);
         void RemoveItem(Item item);
@@ -27,11 +28,15 @@ namespace PiggyBank.Services
             return _itemsRepository.GetItems(); 
         }
 
-        public List<RoomExpenseDto> GetRoomExpenses(int userId)
+        public List<Room> GetRoomExpenses(int roomUserId)
         {
-            using (var dbContext = new DbContext())
+            using (var context = new DbContext())
             {
-                return _itemsRepository.GetRoomExpenses(userId);
+                return context.Room
+                    .Where(r => r.RoomUsers.Any(ru => ru.Id == roomUserId))
+                    .Include(r => r.Expenses)
+                        .ThenInclude(e => e.Items)
+                    .ToList();
             }
         }
 

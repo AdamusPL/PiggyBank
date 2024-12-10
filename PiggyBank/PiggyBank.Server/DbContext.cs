@@ -40,33 +40,6 @@ namespace PiggyBank
             SaveChanges();
         }
 
-        public List<RoomExpenseDto> GetRoomUsers(int userId)
-        {
-            var result = from room in Room
-                         join room_roomuser in Room_RoomUser on room.Id equals room_roomuser.RoomId
-                         join roomUser in RoomUser on room_roomuser.RoomUserId equals roomUser.Id
-                         where roomUser.Id == userId
-                         from expense in Expense
-                             .Where(e => e.RoomId == room.Id)
-                             .DefaultIfEmpty()
-                         from item in Item
-                             .Where(i => i.ExpenseId == expense.Id)
-                             .DefaultIfEmpty()
-                         select new RoomExpenseDto
-                         {
-                             RoomId = room.Id,
-                             RoomName = room.Name,
-                             ExpenseId = expense.Id,
-                             ExpenseName = expense.Name,
-                             PurchaseDate = expense.PurchaseDate,
-                             ItemName = item.Name,
-                             ItemPrice = item.Price,
-                             ItemId = item.Id
-                         };
-
-            return result.ToList();
-        }
-
         public int AddItem(Item item)
         {
             Item.Add(item);
@@ -90,7 +63,7 @@ namespace PiggyBank
         public void RemoveExpense(int expenseId)
         {
             var expense = Expense.Where(e => e.Id == expenseId).FirstOrDefault();
-            var items = Item.Where(i => i.ExpenseId == expenseId);
+            var items = Item.Where(i => i.expense.Id == expenseId);
             if (items != null)
             {
                 foreach (var item in items) {

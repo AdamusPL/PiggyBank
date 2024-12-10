@@ -7,11 +7,11 @@ export default function ModalPrimary({ isJoined, room, setUserRooms }) {
     }
 
     async function joinRoom() {
-        const roomUserId = JSON.parse(localStorage.getItem("user")).id
-        const roomUser = {
-            Id: roomUserId,
-            FirstName: "Marek",
-            Surname: "Lesny"
+        debugger;
+        const roomUserId = JSON.parse(localStorage.getItem("user")).id;
+        const object = {
+            roomUserId: roomUserId,
+            roomId: room.id
         };
         try {
             const response = await fetch('rooms/join', {
@@ -19,7 +19,7 @@ export default function ModalPrimary({ isJoined, room, setUserRooms }) {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ RoomId: room.id, Room: room, RoomUserId: roomUserId, RoomUser: roomUser }),
+                body: JSON.stringify(object)
             });
 
             if (response.ok) {
@@ -34,11 +34,11 @@ export default function ModalPrimary({ isJoined, room, setUserRooms }) {
     }
 
     async function leaveRoom() {
-        const roomUserId = JSON.parse(localStorage.getItem("user")).id
-        const roomUser = {
-            Id: roomUserId,
-            FirstName: "Marek",
-            Surname: "Lesny"
+        debugger;
+        const roomUserId = JSON.parse(localStorage.getItem("user")).id;
+        const object = {
+            roomUserId: roomUserId,
+            roomId: room.id
         };
         try {
             const response = await fetch('rooms/leave', {
@@ -46,7 +46,7 @@ export default function ModalPrimary({ isJoined, room, setUserRooms }) {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ RoomId: room.id, Room: room, RoomUserId: roomUserId, RoomUser: roomUser }),
+                body: JSON.stringify(object),
             });
 
             if (response.ok) {

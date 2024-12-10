@@ -24,9 +24,9 @@ namespace PiggyBank.Controllers
         }
 
         [HttpGet("GetRoomExpenses", Name = "GetRoomExpenses")]
-        public IEnumerable<RoomExpenseDto> GetUserRooms([FromQuery] int userId)
+        public IEnumerable<Room> GetUserRooms([FromQuery] int userId)
         {
-            IEnumerable<RoomExpenseDto> items = _itemsService.GetRoomExpenses(userId);
+            IEnumerable<Room> items = _itemsService.GetRoomExpenses(userId);
             return items;
         }
 

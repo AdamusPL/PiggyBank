@@ -30,15 +30,19 @@ export function Expenses() {
         const data = await response.json();
         const sortedData = {};
 
-        debugger;
-
         data.forEach(item => {
+            debugger;
+            if (item.expenseId === null) {
+                return;
+            }
+
             if (!sortedData[item.roomId]) {
                 sortedData[item.roomId] = {
                     roomName: item.roomName,
                     expenses: {}
                 };
             }
+
             if (!sortedData[item.roomId].expenses[item.expenseId]) {
                 sortedData[item.roomId].expenses[item.expenseId] = {
                     expenseName: item.expenseName,
@@ -57,7 +61,6 @@ export function Expenses() {
     }
 
     const handleSubmitItem = async (roomId, expenseId, item) => {
-        debugger;
         if (userRooms.hasOwnProperty(roomId)) {
             const expensesArray = userRooms[roomId].expenses;
             if (expensesArray.hasOwnProperty(expenseId)) {
@@ -80,9 +83,7 @@ export function Expenses() {
 
                     const result = await response.json();
 
-                    //debugger;
                     if (response.ok) {
-                        // Push the new item to the expense list
                         itemsArray.items.push({
                             itemName: item.name,
                             itemPrice: parseFloat(item.price),

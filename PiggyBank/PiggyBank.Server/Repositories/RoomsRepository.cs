@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PiggyBank.Server.Dtos;
 using PiggyBank.Server.Models;
 
 namespace PiggyBank.Server.Repositories
@@ -6,8 +7,8 @@ namespace PiggyBank.Server.Repositories
     internal interface IRoomsRepository
     {
         List<Room> GetRooms();
-        void JoinRoom(Room_RoomUser room_RoomUser);
-        void LeaveRoom(Room_RoomUser room_RoomUser);
+        void JoinRoom(RoomOperationDto roomOperationDto);
+        void LeaveRoom(RoomOperationDto roomOperationDto);
         List<Room_RoomUser> GetUserRooms(int userId);
         void CreateRoom(Room room);
     }
@@ -43,19 +44,19 @@ namespace PiggyBank.Server.Repositories
             }
         }
 
-        public void JoinRoom(Room_RoomUser roomRoomUser)
+        public void JoinRoom(RoomOperationDto roomOperationDto)
         {
             using (var dbContext = new DbContext())
             {
-                dbContext.AddRoomUserToRoom(roomRoomUser.RoomId, roomRoomUser.RoomUserId);
+                dbContext.AddRoomUserToRoom(roomOperationDto.RoomId, roomOperationDto.RoomUserId);
             }
         }
 
-        public void LeaveRoom(Room_RoomUser roomRoomUser)
+        public void LeaveRoom(RoomOperationDto roomOperationDto)
         {
             using (var dbContext = new DbContext())
             {
-                dbContext.RemoveRoomUserFromRoom(roomRoomUser.RoomId, roomRoomUser.RoomUserId);
+                dbContext.RemoveRoomUserFromRoom(roomOperationDto.RoomId, roomOperationDto.RoomUserId);
             }
         }
     }
