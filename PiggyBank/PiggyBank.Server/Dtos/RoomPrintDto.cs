@@ -13,7 +13,7 @@ namespace PiggyBank.Server.Dtos
         {
             Id = id;
             Name = name;
-            SumExpenses = SumExpenses;
+            SumExpenses = sumExpenses;
             Expenses = new List<ExpensePrintDto>();
         }
     }
