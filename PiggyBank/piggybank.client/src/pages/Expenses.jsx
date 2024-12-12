@@ -82,53 +82,56 @@ export function Expenses() {
         handleSubmitExpense(roomId, expense);
     };
 
-    const countSumOfItems = (roomId, expenseId) => (e) => {
-        let sum = 0;
-        userRooms[roomId].expenses[expenseId].items.forEach((item) => {
-            sum += item.itemPrice;
-        });
-        sum = sum.toFixed(2);
-        return sum;
-    };
-
-    const countSumOfExpenses = (roomId) => (e) => {
-        let sum = 0;
-        const expensesSome = userRooms[roomId].expenses;
-        let iterated = false;
-        Object.keys(expensesSome).map((expenseId) => {
-            expensesSome[expenseId].items.forEach((item) => {
-                const price = parseFloat(item.itemPrice);
-                if (!isNaN(price)) {
-                    sum += price;
-                    iterated = true;
-                }
-            });
-        });
-        if (iterated) {
-            sum = sum.toFixed(2);
-        }
-        else {
-            sum = 0;
-        }
-        return sum;
-    }
-
-    async function removeItem(itemId) {
+    async function removeItem(roomId, expenseId, itemId) {
         try {
             const response = await fetch(`items/RemoveItem?itemId=${itemId}`, {
                 method: 'POST'
             });
+
+            setUserRooms((prevRooms) =>
+                prevRooms.map((room) => {
+                    if (room.id === roomId) {
+                        return {
+                            ...room,
+                            expenses:
+                                room.expenses.map((expense) => {
+                                    if (expense.id === expenseId) {
+                                        return {
+                                            ...expense,
+                                            items: expense.items.filter((item) => item.id !== itemId)
+                                        };
+                                    }
+                                    return expense;
+                                })
+                        };
+                    }
+                    return room;
+                })
+            )
+
 
         } catch (error) {
             console.error('Error:', error);
         }
     }
 
-    async function removeExpense(expenseId) {
+    async function removeExpense(roomId, expenseId) {
         try {
             const response = await fetch(`items/RemoveExpense?expenseId=${expenseId}`, {
                 method: 'POST'
             });
+
+            setUserRooms((prevRooms) =>
+                prevRooms.map((room) => {
+                    if (room.id === roomId) {
+                        return {
+                            ...room,
+                            expenses: room.expenses.filter((expense) => expense.id !== expenseId)
+                        };
+                    }
+                    return room;
+                })
+            );
 
         } catch (error) {
             console.error('Error:', error);
@@ -154,13 +157,13 @@ export function Expenses() {
                                         <div className="h-100 p-5 bg-body-tertiary border rounded-3" key={expense.id}>
                                             <div className="one-row">
                                                 <h3>{expense.name}</h3>
-                                                <button className="btn btn-outline-secondary" type="button" onClick={() => removeExpense(expense.id)}>X</button>
+                                                <button className="btn btn-outline-secondary" type="button" onClick={() => removeExpense(room.id, expense.id)}>X</button>
                                             </div>
                                             {expense.items.length > 0 ?
                                                 expense.items.map(item => (
                                                     <div className="one-row" key={item.id}>
                                                         <p>{item.name}: {item.price}</p>
-                                                        <button className="btn btn-outline-secondary" type="button" onClick={() => removeItem(item.id)}>X</button>
+                                                        <button className="btn btn-outline-secondary" type="button" onClick={() => removeItem(room.id, expense.id, item.id)}>X</button>
                                                     </div>
                                                 ))
                                                 : <p>No items</p>
@@ -177,11 +180,15 @@ export function Expenses() {
                                                 </form>
                                             </div>
 
+                                            <p>Summary of expense: {expense.sumItems}</p>
+
                                         </div>
                                     ))
                                     :
                                     <p>No expenses</p>
                                 }
+
+                                <p>Summary of room expenses: {room.sumExpenses}</p>
 
                                 <div className="new-expenses">
                                     <h3>Add new expense</h3>

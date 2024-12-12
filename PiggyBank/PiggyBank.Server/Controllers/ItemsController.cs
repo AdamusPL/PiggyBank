@@ -17,9 +17,9 @@ namespace PiggyBank.Controllers
         }
 
         [HttpGet("GetRoomExpenses", Name = "GetRoomExpenses")]
-        public IEnumerable<Room> GetUserRooms([FromQuery] int userId)
+        public IEnumerable<RoomPrintDto> GetUserRooms([FromQuery] int userId)
         {
-            IEnumerable<Room> items = _itemsService.GetRoomExpenses(userId);
+            IEnumerable<RoomPrintDto> items = _itemsService.GetRoomExpenses(userId);
             return items;
         }
 
@@ -35,7 +35,6 @@ namespace PiggyBank.Controllers
         {
             int id = _itemsService.AddExpense(expenseDto);
             return Ok(new { id = id });
-
         }
 
         [HttpPost("RemoveItem", Name = "RemoveItem")]

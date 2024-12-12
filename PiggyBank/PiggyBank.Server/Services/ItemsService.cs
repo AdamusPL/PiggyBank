@@ -3,12 +3,13 @@ using PiggyBank.Models;
 using PiggyBank.Repositories;
 using PiggyBank.Server.Dtos;
 using PiggyBank.Server.Models;
+using System;
 
 namespace PiggyBank.Services
 {
     public interface IItemsService
     {
-        List<Room> GetRoomExpenses(int roomUserId);
+        List<RoomPrintDto> GetRoomExpenses(int roomUserId);
         int AddItem(ItemDto itemDto);
         int AddExpense(ExpenseDto expenseDto);
         void RemoveItem(int itemId);
@@ -22,15 +23,34 @@ namespace PiggyBank.Services
             _itemsRepository = itemsRepository;
         }
 
-        public List<Room> GetRoomExpenses(int roomUserId)
+        public List<RoomPrintDto> GetRoomExpenses(int roomUserId)
         {
             using (var context = new DbContext())
             {
-                return context.Room
+                List<RoomPrintDto> list = new List<RoomPrintDto>();
+
+                var rooms = context.Room
                     .Where(r => r.Room_RoomUsers.Any(ru => ru.RoomUserId == roomUserId))
                     .Include(r => r.Expenses)
                         .ThenInclude(e => e.Items)
                     .ToList();
+
+                foreach (var room in rooms)
+                {
+                    double SumExpenses = room.Expenses?.Sum(e => e.Items.Sum(i => i.Price)) ?? 0;
+                    RoomPrintDto roomPrintDto = new RoomPrintDto(room.Id, room.Name, Math.Round(SumExpenses, 2));
+
+                    foreach (var expense in room.Expenses)
+                    {
+                        double SumItems = expense.Items?.Sum(i => i.Price) ?? 0;
+                        roomPrintDto.Expenses.Add(new ExpensePrintDto(expense.Id, expense.Name, expense.PurchaseDate.ToString("MM/dd/yyyy"), expense.Items, Math.Round(SumItems, 2)));
+                    }
+
+                    list.Add(roomPrintDto);
+
+                }
+
+                return list;
             }
         }
 
