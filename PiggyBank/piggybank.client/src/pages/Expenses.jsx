@@ -82,22 +82,26 @@ export function Expenses() {
         handleSubmitExpense(roomId, expense);
     };
 
-    async function removeItem(roomId, expenseId, itemId) {
+    async function removeItem(roomId, expenseId, itemId, price) {
         try {
             const response = await fetch(`items/RemoveItem?itemId=${itemId}`, {
                 method: 'POST'
             });
+
+            console.log(userRooms);
 
             setUserRooms((prevRooms) =>
                 prevRooms.map((room) => {
                     if (room.id === roomId) {
                         return {
                             ...room,
+                            sumExpenses: Math.round(room.sumExpenses - price, 2),
                             expenses:
                                 room.expenses.map((expense) => {
                                     if (expense.id === expenseId) {
                                         return {
                                             ...expense,
+                                            sumItems: Math.round(expense.sumItems - price, 2),
                                             items: expense.items.filter((item) => item.id !== itemId)
                                         };
                                     }
@@ -115,7 +119,7 @@ export function Expenses() {
         }
     }
 
-    async function removeExpense(roomId, expenseId) {
+    async function removeExpense(roomId, expenseId, sumItems) {
         try {
             const response = await fetch(`items/RemoveExpense?expenseId=${expenseId}`, {
                 method: 'POST'
@@ -126,6 +130,7 @@ export function Expenses() {
                     if (room.id === roomId) {
                         return {
                             ...room,
+                            sumExpenses: Math.round(room.sumExpenses - sumItems, 2),
                             expenses: room.expenses.filter((expense) => expense.id !== expenseId)
                         };
                     }
@@ -157,13 +162,13 @@ export function Expenses() {
                                         <div className="h-100 p-5 bg-body-tertiary border rounded-3" key={expense.id}>
                                             <div className="one-row">
                                                 <h3>{expense.name}</h3>
-                                                <button className="btn btn-outline-secondary" type="button" onClick={() => removeExpense(room.id, expense.id)}>X</button>
+                                                <button className="btn btn-outline-secondary" type="button" onClick={() => removeExpense(room.id, expense.id, expense.sumItems)}>X</button>
                                             </div>
                                             {expense.items.length > 0 ?
                                                 expense.items.map(item => (
                                                     <div className="one-row" key={item.id}>
                                                         <p>{item.name}: {item.price}</p>
-                                                        <button className="btn btn-outline-secondary" type="button" onClick={() => removeItem(room.id, expense.id, item.id)}>X</button>
+                                                        <button className="btn btn-outline-secondary" type="button" onClick={() => removeItem(room.id, expense.id, item.id, item.price)}>X</button>
                                                     </div>
                                                 ))
                                                 : <p>No items</p>
