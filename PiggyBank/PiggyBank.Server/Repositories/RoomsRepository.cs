@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PiggyBank.Server.Dtos;
 using PiggyBank.Server.Models;
+using PiggyBank.Server.Utils;
 
 namespace PiggyBank.Server.Repositories
 {
@@ -23,6 +24,13 @@ namespace PiggyBank.Server.Repositories
                 {
                     room.Password = null;
                 }
+                else
+                {
+                    byte[] salt = PasswordManager.GenerateSalt();
+                    string hashedPassword = PasswordManager.HashPassword(room.Password, salt);
+                    room.Password = hashedPassword;
+                }
+
                 dbContext.Room.Add(room);
                 dbContext.SaveChanges();
             }

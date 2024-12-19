@@ -95,7 +95,7 @@ export function Expenses() {
                     if (room.id === roomId) {
                         return {
                             ...room,
-                            sumExpenses: Math.round(room.sumExpenses - price, 2),
+                            sumExpenses: roundToTwoDecimals(room.sumExpenses - price),
                             expenses:
                                 room.expenses.map((expense) => {
                                     if (expense.id === expenseId) {
@@ -119,6 +119,10 @@ export function Expenses() {
         }
     }
 
+    function roundToTwoDecimals(value) {
+        return Math.round(value * 100) / 100;
+    }
+
     async function removeExpense(roomId, expenseId, sumItems) {
         try {
             const response = await fetch(`items/RemoveExpense?expenseId=${expenseId}`, {
@@ -130,7 +134,7 @@ export function Expenses() {
                     if (room.id === roomId) {
                         return {
                             ...room,
-                            sumExpenses: Math.round(room.sumExpenses - sumItems, 2),
+                            sumExpenses: roundToTwoDecimals(room.sumExpenses - sumItems),
                             expenses: room.expenses.filter((expense) => expense.id !== expenseId)
                         };
                     }

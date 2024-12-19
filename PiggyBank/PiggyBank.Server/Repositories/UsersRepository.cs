@@ -4,6 +4,7 @@ using System.Text;
 using System.Security.Cryptography;
 using System.Drawing;
 using PiggyBank.Server.Dtos;
+using PiggyBank.Server.Utils;
 
 namespace PiggyBank.Server.Repositories
 {
@@ -21,20 +22,7 @@ namespace PiggyBank.Server.Repositories
                 var user = dbContext.Users.FirstOrDefault(u => u.Username == username);
                 if (user != null)
                 {
-                    string storedHashedPassword = user.Password;
-                    byte[] storedSaltBytes = Convert.FromBase64String(user.Salt);
-
-                    // Convert the stored salt and entered password to byte arrays
-                    // byte[] storedSaltBytes = Convert.FromBase64String(user.Salt);
-                    byte[] enteredPasswordBytes = Encoding.UTF8.GetBytes(password);
-
-                    // Concatenate entered password and stored salt
-                    byte[] saltedPassword = new byte[enteredPasswordBytes.Length + storedSaltBytes.Length];
-                    Buffer.BlockCopy(enteredPasswordBytes, 0, saltedPassword, 0, enteredPasswordBytes.Length);
-                    Buffer.BlockCopy(storedSaltBytes, 0, saltedPassword, enteredPasswordBytes.Length, storedSaltBytes.Length);
-
-                    // Hash the concatenated value
-                    string enteredPasswordHash = HashPassword(password, storedSaltBytes);
+                    string enteredPasswordHash = PasswordManager.CheckPassword(password, user.Salt);
                     if (user.Password == enteredPasswordHash) {
                         var userFinal = new Users()
                         {
@@ -57,24 +45,6 @@ namespace PiggyBank.Server.Repositories
             }
         }
 
-        string HashPassword(string password, byte[] salt)
-        {
-            var sha256 = new SHA256Managed();
-            byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
-            byte[] saltedPassword = new byte[passwordBytes.Length + salt.Length];
-
-            Buffer.BlockCopy(passwordBytes, 0, saltedPassword, 0, passwordBytes.Length);
-            Buffer.BlockCopy(salt, 0, saltedPassword, passwordBytes.Length, salt.Length);
-
-            byte[] hashedBytes = sha256.ComputeHash(saltedPassword);
-
-            byte[] hashedPasswordWithSalt = new byte[hashedBytes.Length + salt.Length];
-            Buffer.BlockCopy(salt, 0, hashedPasswordWithSalt, 0, salt.Length);
-            Buffer.BlockCopy(hashedBytes, 0, hashedPasswordWithSalt, salt.Length, hashedBytes.Length);
-
-            return Convert.ToBase64String(hashedPasswordWithSalt);
-        }
-
         public bool RegisterUser(string username, string password, string firstName, string surname) 
         {
             using (var dbContext = new DbContext())
@@ -91,14 +61,8 @@ namespace PiggyBank.Server.Repositories
                     dbContext.RoomUser.Add(roomUser);
                     dbContext.SaveChanges();
 
-                    byte[] salt = new byte[16];
-                    
-                    using (var rng = new RNGCryptoServiceProvider())
-                    {
-                        rng.GetBytes(salt);
-                    }
-
-                    password = HashPassword(password, salt);
+                    byte[] salt = PasswordManager.GenerateSalt();
+                    password = PasswordManager.HashPassword(password, salt);
 
                     UsersDto user = new UsersDto
                     {
