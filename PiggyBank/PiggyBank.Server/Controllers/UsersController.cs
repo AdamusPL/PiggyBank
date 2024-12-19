@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PiggyBank.Server.Models;
+using PiggyBank.Server.Dtos;
 using PiggyBank.Server.Services;
 
 namespace PiggyBank.Server.Controllers
@@ -16,7 +16,7 @@ namespace PiggyBank.Server.Controllers
         [HttpGet("GetUser", Name = "GetUser")]
         public IActionResult Get([FromQuery] string username, [FromQuery] string password)
         {
-            Users user = _usersService.GetUser(username, password);
+            UsersDto user = _usersService.GetUser(username, password);
             if(user != null)
             {
                 return Ok(user);

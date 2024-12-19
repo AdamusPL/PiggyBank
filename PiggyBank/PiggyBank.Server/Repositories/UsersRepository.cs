@@ -10,12 +10,12 @@ namespace PiggyBank.Server.Repositories
 {
     internal interface IUsersRepository
     {
-        Users GetUser(string username, string password);
+        UsersDto GetUser(string username, string password);
         bool RegisterUser(string username, string password, string firstName, string surname);
     }
     internal class UsersRepository : IUsersRepository
     {
-        public Users GetUser(string username, string password)
+        public UsersDto GetUser(string username, string password)
         {
             using (var dbContext = new DbContext())
             {
@@ -24,7 +24,7 @@ namespace PiggyBank.Server.Repositories
                 {
                     string enteredPasswordHash = PasswordManager.CheckPassword(password, user.Salt);
                     if (user.Password == enteredPasswordHash) {
-                        var userFinal = new Users()
+                        var userFinal = new UsersDto()
                         {
                             Id = user.Id,
                             Username = user.Username,
@@ -64,7 +64,7 @@ namespace PiggyBank.Server.Repositories
                     byte[] salt = PasswordManager.GenerateSalt();
                     password = PasswordManager.HashPassword(password, salt);
 
-                    UsersDto user = new UsersDto
+                    Users user = new Users
                     {
                         Username = username,
                         Password = password,

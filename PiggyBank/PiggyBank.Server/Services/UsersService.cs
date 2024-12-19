@@ -1,11 +1,11 @@
-﻿using PiggyBank.Server.Models;
+﻿using PiggyBank.Server.Dtos;
 using PiggyBank.Server.Repositories;
 
 namespace PiggyBank.Server.Services
 {
     public interface IUsersService
     {
-        Users GetUser(string username, string password);
+        UsersDto GetUser(string username, string password);
         bool RegisterUser(string username, string password, string firstName, string surname);
     }
 
@@ -17,7 +17,7 @@ namespace PiggyBank.Server.Services
             _usersRepository = usersRepository;
         }
 
-        public Users GetUser(string username, string password) {
+        public UsersDto GetUser(string username, string password) {
             return _usersRepository.GetUser(username, password);
         }
 
