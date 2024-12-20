@@ -16,56 +16,49 @@ namespace PiggyBank.Server.Repositories
 
     internal class RoomsRepository : IRoomsRepository
     {
+        private readonly AppDbContext _dbContext;
+
+        public RoomsRepository(AppDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         public void CreateRoom(Room room)
         {
-            using (var dbContext = new DbContext())
+            if (room.Password == "")
             {
-                if(room.Password == "")
-                {
-                    room.Password = null;
-                }
-                else
-                {
-                    byte[] salt = PasswordManager.GenerateSalt();
-                    string hashedPassword = PasswordManager.HashPassword(room.Password, salt);
-                    room.Password = hashedPassword;
-                }
-
-                dbContext.Room.Add(room);
-                dbContext.SaveChanges();
+                room.Password = null;
             }
+            else
+            {
+                byte[] salt = PasswordManager.GenerateSalt();
+                string hashedPassword = PasswordManager.HashPassword(room.Password, salt);
+                room.Password = hashedPassword;
+            }
+
+            _dbContext.Room.Add(room);
+            _dbContext.SaveChanges();
+
         }
 
         public List<Room> GetRooms()
         {
-            using (var dbContext = new DbContext())
-            {
-                return dbContext.Room.ToList();
-            }
+            return _dbContext.Room.ToList();
         }
 
         public List<Room_RoomUser> GetUserRooms(int userId)
         {
-            using (var dbContext = new DbContext())
-            {
-                return dbContext.Room_RoomUser.FromSqlRaw("SELECT * FROM Room_RoomUser WHERE RoomUserId = {0}", userId).ToList();
-            }
+            return _dbContext.Room_RoomUser.FromSqlRaw("SELECT * FROM Room_RoomUser WHERE RoomUserId = {0}", userId).ToList();
         }
 
         public void JoinRoom(RoomOperationDto roomOperationDto)
         {
-            using (var dbContext = new DbContext())
-            {
-                dbContext.AddRoomUserToRoom(roomOperationDto.RoomId, roomOperationDto.RoomUserId);
-            }
+            _dbContext.AddRoomUserToRoom(roomOperationDto.RoomId, roomOperationDto.RoomUserId);
         }
 
         public void LeaveRoom(RoomOperationDto roomOperationDto)
         {
-            using (var dbContext = new DbContext())
-            {
-                dbContext.RemoveRoomUserFromRoom(roomOperationDto.RoomId, roomOperationDto.RoomUserId);
-            }
+            _dbContext.RemoveRoomUserFromRoom(roomOperationDto.RoomId, roomOperationDto.RoomUserId);
         }
     }
 }

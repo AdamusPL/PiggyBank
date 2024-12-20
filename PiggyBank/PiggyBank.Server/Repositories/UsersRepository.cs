@@ -15,70 +15,73 @@ namespace PiggyBank.Server.Repositories
     }
     internal class UsersRepository : IUsersRepository
     {
+        private readonly AppDbContext _dbContext;
+
+        public UsersRepository(AppDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         public UsersDto GetUser(string username, string password)
         {
-            using (var dbContext = new DbContext())
+            var user = _dbContext.Users.FirstOrDefault(u => u.Username == username);
+            if (user != null)
             {
-                var user = dbContext.Users.FirstOrDefault(u => u.Username == username);
-                if (user != null)
+                string enteredPasswordHash = PasswordManager.CheckPassword(password, user.Salt);
+                if (user.Password == enteredPasswordHash)
                 {
-                    string enteredPasswordHash = PasswordManager.CheckPassword(password, user.Salt);
-                    if (user.Password == enteredPasswordHash) {
-                        var userFinal = new UsersDto()
-                        {
-                            Id = user.Id,
-                            Username = user.Username,
-                            Password = user.Password,
-                            RoomUserId = user.RoomUserId,
-                        };
-                        return userFinal;
-                    }
-                    else
+                    var userFinal = new UsersDto()
                     {
-                        return null;
-                    }
+                        Id = user.Id,
+                        Username = user.Username,
+                        Password = user.Password,
+                        RoomUserId = user.RoomUserId,
+                    };
+                    return userFinal;
                 }
                 else
                 {
                     return null;
                 }
             }
+            else
+            {
+                return null;
+            }
+
         }
 
-        public bool RegisterUser(string username, string password, string firstName, string surname) 
+        public bool RegisterUser(string username, string password, string firstName, string surname)
         {
-            using (var dbContext = new DbContext())
+            var existingUser = _dbContext.Users.FirstOrDefault(u => u.Username == username);
+            if (existingUser == null)
             {
-                var existingUser = dbContext.Users.FirstOrDefault(u => u.Username == username);
-                if (existingUser == null)
+                RoomUser roomUser = new RoomUser
                 {
-                    RoomUser roomUser = new RoomUser
-                    {
-                        FirstName = firstName,
-                        Surname = surname
-                    };
+                    FirstName = firstName,
+                    Surname = surname
+                };
 
-                    dbContext.RoomUser.Add(roomUser);
-                    dbContext.SaveChanges();
+                _dbContext.RoomUser.Add(roomUser);
+                _dbContext.SaveChanges();
 
-                    byte[] salt = PasswordManager.GenerateSalt();
-                    password = PasswordManager.HashPassword(password, salt);
+                byte[] salt = PasswordManager.GenerateSalt();
+                password = PasswordManager.HashPassword(password, salt);
 
-                    Users user = new Users
-                    {
-                        Username = username,
-                        Password = password,
-                        Salt = Convert.ToBase64String(salt),
-                        RoomUserId = roomUser.Id
-                    };
-                    dbContext.Users.Add(user);
-                    dbContext.SaveChanges();
-                    return true;
-                }
-                else
+                Users user = new Users
                 {
-                    return false;
-                }
+                    Username = username,
+                    Password = password,
+                    Salt = Convert.ToBase64String(salt),
+                    RoomUserId = roomUser.Id
+                };
+                _dbContext.Users.Add(user);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

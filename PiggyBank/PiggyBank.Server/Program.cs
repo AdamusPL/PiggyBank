@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using PiggyBank;
 using PiggyBank.Repositories;
 using PiggyBank.Server.Repositories;
 using PiggyBank.Server.Services;
@@ -17,6 +19,8 @@ builder.Services.AddScoped<IRoomsRepository, RoomsRepository>();
 builder.Services.AddScoped<IRoomsService, RoomsService>();
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 builder.Services.AddScoped<IUsersService, UsersService>();
+
+builder.Services.AddDbContext<AppDbContext>(opt=>opt.UseSqlServer(builder.Configuration.GetConnectionString("SQL")));
 
 var app = builder.Build();
 

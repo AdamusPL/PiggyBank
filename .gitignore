@@ -3,3 +3,5 @@
 /PiggyBank/.vs
 /PiggyBank/PiggyBank.Server/bin
 /PiggyBank/PiggyBank.Server/obj
+/PiggyBank/PiggyBank.Server/Properties/PublishProfiles
+/PiggyBank/PiggyBank.Server/Properties/ServiceDependencies

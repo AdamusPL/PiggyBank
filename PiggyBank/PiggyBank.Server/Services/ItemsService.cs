@@ -19,39 +19,39 @@ namespace PiggyBank.Services
     internal class ItemsService : IItemsService
     {
         private readonly IItemsRepository _itemsRepository;
-        public ItemsService(IItemsRepository itemsRepository) {
+        private readonly AppDbContext _appDbContext;
+        public ItemsService(IItemsRepository itemsRepository, AppDbContext appDbContext)
+        {
             _itemsRepository = itemsRepository;
+            _appDbContext = appDbContext;
         }
 
         public List<RoomPrintDto> GetRoomExpenses(int roomUserId)
         {
-            using (var context = new DbContext())
+            List<RoomPrintDto> list = new List<RoomPrintDto>();
+
+            var rooms = _appDbContext.Room
+                .Where(r => r.Room_RoomUsers.Any(ru => ru.RoomUserId == roomUserId))
+                .Include(r => r.Expenses)
+                    .ThenInclude(e => e.Items)
+                .ToList();
+
+            foreach (var room in rooms)
             {
-                List<RoomPrintDto> list = new List<RoomPrintDto>();
+                double SumExpenses = room.Expenses?.Sum(e => e.Items.Sum(i => i.Price)) ?? 0;
+                RoomPrintDto roomPrintDto = new RoomPrintDto(room.Id, room.Name, Math.Round(SumExpenses, 2));
 
-                var rooms = context.Room
-                    .Where(r => r.Room_RoomUsers.Any(ru => ru.RoomUserId == roomUserId))
-                    .Include(r => r.Expenses)
-                        .ThenInclude(e => e.Items)
-                    .ToList();
-
-                foreach (var room in rooms)
+                foreach (var expense in room.Expenses)
                 {
-                    double SumExpenses = room.Expenses?.Sum(e => e.Items.Sum(i => i.Price)) ?? 0;
-                    RoomPrintDto roomPrintDto = new RoomPrintDto(room.Id, room.Name, Math.Round(SumExpenses, 2));
-
-                    foreach (var expense in room.Expenses)
-                    {
-                        double SumItems = expense.Items?.Sum(i => i.Price) ?? 0;
-                        roomPrintDto.Expenses.Add(new ExpensePrintDto(expense.Id, expense.Name, expense.PurchaseDate.ToString("MM/dd/yyyy"), expense.Items, Math.Round(SumItems, 2)));
-                    }
-
-                    list.Add(roomPrintDto);
-
+                    double SumItems = expense.Items?.Sum(i => i.Price) ?? 0;
+                    roomPrintDto.Expenses.Add(new ExpensePrintDto(expense.Id, expense.Name, expense.PurchaseDate.ToString("MM/dd/yyyy"), expense.Items, Math.Round(SumItems, 2)));
                 }
 
-                return list;
+                list.Add(roomPrintDto);
+
             }
+
+            return list;
         }
 
         public int AddItem(ItemDto itemDto)

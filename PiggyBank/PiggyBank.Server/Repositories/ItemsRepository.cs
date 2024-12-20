@@ -1,6 +1,4 @@
-﻿using PiggyBank.Models;
-using PiggyBank.Server.Dtos;
-using PiggyBank.Server.Models;
+﻿using PiggyBank.Server.Dtos;
 
 namespace PiggyBank.Repositories
 {
@@ -14,43 +12,34 @@ namespace PiggyBank.Repositories
 
     internal class ItemsRepository : IItemsRepository
     {
+        private readonly AppDbContext _dbContext;
+
+        public ItemsRepository(AppDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         public int AddItem(ItemDto itemDto)
         {
-            int id;
-            using (var dbContext = new DbContext())
-            {
-                id = dbContext.AddItem(itemDto);
-            }
-            return id;
+            return _dbContext.AddItem(itemDto);
         }
 
         public int AddExpense(ExpenseDto expenseDto)
         {
-            int id;
-            using (var dbContext = new DbContext())
-            {
-                id = dbContext.AddExpense(expenseDto);
-            }
-            return id;
+            return _dbContext.AddExpense(expenseDto);
         }
 
         public void RemoveItem(int itemId)
         {
-            using (var dbContext = new DbContext())
-            {
-                var entity = dbContext.Item.Find(itemId);
-                dbContext.Item.Remove(entity);
-                dbContext.SaveChanges();
-            }
+            var entity = _dbContext.Item.Find(itemId);
+            _dbContext.Item.Remove(entity);
+            _dbContext.SaveChanges();
         }
 
         public void RemoveExpense(int expenseId)
         {
-            using (var dbContext = new DbContext())
-            {
-                dbContext.RemoveExpense(expenseId);
-            }
+            _dbContext.RemoveExpense(expenseId);
         }
-        
+
     }
 }

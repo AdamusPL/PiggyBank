@@ -5,7 +5,7 @@ using PiggyBank.Server.Models;
 
 namespace PiggyBank
 {
-    public class DbContext : Microsoft.EntityFrameworkCore.DbContext
+    public class AppDbContext : DbContext
     {
         public DbSet<Item> Item { get; set; }
         public DbSet<Room> Room { get; set; }
@@ -13,6 +13,11 @@ namespace PiggyBank
         public DbSet<Users> Users { get; set; }
         public DbSet<Expense> Expense { get; set; }
         public DbSet<RoomUser> RoomUser {  get; set; }
+
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+
+        }
 
         public void AddRoomUserToRoom(int roomId, int roomUserId)
         {
@@ -72,14 +77,6 @@ namespace PiggyBank
                 Expense.Remove(expense);
             }
             SaveChanges();
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Data Source=LAPTOP-C7FDP790\\SQLEXPRESS;Initial Catalog=PiggyBank;TrustServerCertificate=True;Integrated Security=SSPI;User ID=admin;Password=password;");
-            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
