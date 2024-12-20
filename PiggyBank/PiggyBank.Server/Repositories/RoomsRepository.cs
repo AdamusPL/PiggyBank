@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PiggyBank.Server.Dtos;
 using PiggyBank.Server.Models;
-using PiggyBank.Server.Utils;
 
 namespace PiggyBank.Server.Repositories
 {
@@ -12,6 +11,7 @@ namespace PiggyBank.Server.Repositories
         void LeaveRoom(RoomOperationDto roomOperationDto);
         List<Room_RoomUser> GetUserRooms(int userId);
         void CreateRoom(Room room);
+        List<Room> GetRoom(int roomUserId);
     }
 
     internal class RoomsRepository : IRoomsRepository
@@ -25,20 +25,8 @@ namespace PiggyBank.Server.Repositories
 
         public void CreateRoom(Room room)
         {
-            if (room.Password == "")
-            {
-                room.Password = null;
-            }
-            else
-            {
-                byte[] salt = PasswordManager.GenerateSalt();
-                string hashedPassword = PasswordManager.HashPassword(room.Password, salt);
-                room.Password = hashedPassword;
-            }
-
             _dbContext.Room.Add(room);
             _dbContext.SaveChanges();
-
         }
 
         public List<Room> GetRooms()
@@ -59,6 +47,15 @@ namespace PiggyBank.Server.Repositories
         public void LeaveRoom(RoomOperationDto roomOperationDto)
         {
             _dbContext.RemoveRoomUserFromRoom(roomOperationDto.RoomId, roomOperationDto.RoomUserId);
+        }
+
+        public List<Room> GetRoom(int roomUserId)
+        {
+            return _dbContext.Room
+                .Where(r => r.Room_RoomUsers.Any(ru => ru.RoomUserId == roomUserId))
+                .Include(r => r.Expenses)
+                    .ThenInclude(e => e.Items)
+                .ToList();
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using PiggyBank.Models;
-using PiggyBank.Server.Dtos;
+﻿using PiggyBank.Server.Dtos;
 using PiggyBank.Server.Models;
 using PiggyBank.Server.Repositories;
+using PiggyBank.Server.Utils;
 
 namespace PiggyBank.Server.Services
 {
@@ -44,6 +44,16 @@ namespace PiggyBank.Server.Services
 
         public void CreateRoom(Room room)
         {
+            if (room.Password == "")
+            {
+                room.Password = null;
+            }
+            else
+            {
+                byte[] salt = PasswordManager.GenerateSalt();
+                string hashedPassword = PasswordManager.HashPassword(room.Password, salt);
+                room.Password = hashedPassword;
+            }
             _roomsRepository.CreateRoom(room);
         }
     }

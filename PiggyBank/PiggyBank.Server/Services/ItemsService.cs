@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PiggyBank.Models;
-using PiggyBank.Repositories;
+﻿using PiggyBank.Repositories;
 using PiggyBank.Server.Dtos;
-using PiggyBank.Server.Models;
-using System;
+using PiggyBank.Server.Repositories;
 
 namespace PiggyBank.Services
 {
@@ -19,22 +16,18 @@ namespace PiggyBank.Services
     internal class ItemsService : IItemsService
     {
         private readonly IItemsRepository _itemsRepository;
-        private readonly AppDbContext _appDbContext;
-        public ItemsService(IItemsRepository itemsRepository, AppDbContext appDbContext)
+        private readonly IRoomsRepository _roomsRepository;
+        public ItemsService(IItemsRepository itemsRepository, IRoomsRepository roomsRepository)
         {
             _itemsRepository = itemsRepository;
-            _appDbContext = appDbContext;
+            _roomsRepository = roomsRepository;
         }
 
         public List<RoomPrintDto> GetRoomExpenses(int roomUserId)
         {
             List<RoomPrintDto> list = new List<RoomPrintDto>();
 
-            var rooms = _appDbContext.Room
-                .Where(r => r.Room_RoomUsers.Any(ru => ru.RoomUserId == roomUserId))
-                .Include(r => r.Expenses)
-                    .ThenInclude(e => e.Items)
-                .ToList();
+            var rooms = _roomsRepository.GetRoom(roomUserId);
 
             foreach (var room in rooms)
             {
