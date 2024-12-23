@@ -11,7 +11,7 @@ namespace PiggyBank.Server.Services
         void JoinRoom(RoomOperationDto roomOperationDto);
         void LeaveRoom(RoomOperationDto roomOperationDto);
         List<Room_RoomUser> GetUserRooms(int userId);
-        void CreateRoom(Room room);
+        void CreateRoom(NewRoomDto room);
     }
     internal class RoomsService : IRoomsService
     {
@@ -29,12 +29,23 @@ namespace PiggyBank.Server.Services
 
         public void JoinRoom(RoomOperationDto roomOperationDto)
         {
-            _roomsRepository.JoinRoom(roomOperationDto);
+            var roomRoomUser = new Room_RoomUser
+            {
+                RoomId = roomOperationDto.RoomId,
+                RoomUserId = roomOperationDto.RoomUserId
+            };
+            _roomsRepository.JoinRoom(roomRoomUser);
         }
 
         public void LeaveRoom(RoomOperationDto roomOperationDto)
         {
-            _roomsRepository.LeaveRoom(roomOperationDto);
+            var roomRoomUser = new Room_RoomUser
+            {
+                RoomId = roomOperationDto.RoomId,
+                RoomUserId = roomOperationDto.RoomUserId
+            };
+
+            _roomsRepository.LeaveRoom(roomRoomUser);
         }
 
         public List<Room_RoomUser> GetUserRooms(int userId)
@@ -42,19 +53,28 @@ namespace PiggyBank.Server.Services
             return _roomsRepository.GetUserRooms(userId);
         }
 
-        public void CreateRoom(Room room)
+        public void CreateRoom(NewRoomDto room)
         {
+            Room room1;
             if (room.Password == "")
             {
-                room.Password = null;
+                room1 = new Room() {
+                    Name = room.Name,
+                    Password = null
+                };
             }
             else
             {
                 byte[] salt = PasswordManager.GenerateSalt();
                 string hashedPassword = PasswordManager.HashPassword(room.Password, salt);
-                room.Password = hashedPassword;
+                room1 = new Room()
+                {
+                    Name = room.Name,
+                    Password = hashedPassword,
+                    Salt = Convert.ToBase64String(salt)
+                };
             }
-            _roomsRepository.CreateRoom(room);
+            _roomsRepository.CreateRoom(room1);
         }
     }
 }

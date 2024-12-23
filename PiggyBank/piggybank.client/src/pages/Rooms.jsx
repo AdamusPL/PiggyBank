@@ -30,6 +30,7 @@ export function Rooms() {
     }
 
     async function handleCreateRoom() {
+        debugger;
         const room = {
             name: roomName,
             password: password

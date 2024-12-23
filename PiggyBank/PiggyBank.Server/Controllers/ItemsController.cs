@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PiggyBank.Models;
 using PiggyBank.Server.Dtos;
-using PiggyBank.Server.Models;
 using PiggyBank.Services;
 
 namespace PiggyBank.Controllers

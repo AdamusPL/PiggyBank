@@ -7,8 +7,8 @@ namespace PiggyBank.Server.Repositories
     internal interface IRoomsRepository
     {
         List<Room> GetRooms();
-        void JoinRoom(RoomOperationDto roomOperationDto);
-        void LeaveRoom(RoomOperationDto roomOperationDto);
+        void JoinRoom(Room_RoomUser roomRoomUser);
+        void LeaveRoom(Room_RoomUser roomRoomUser);
         List<Room_RoomUser> GetUserRooms(int userId);
         void CreateRoom(Room room);
         List<Room> GetRoom(int roomUserId);
@@ -39,14 +39,16 @@ namespace PiggyBank.Server.Repositories
             return _dbContext.Room_RoomUser.FromSqlRaw("SELECT * FROM Room_RoomUser WHERE RoomUserId = {0}", userId).ToList();
         }
 
-        public void JoinRoom(RoomOperationDto roomOperationDto)
+        public void JoinRoom(Room_RoomUser roomRoomUser)
         {
-            _dbContext.AddRoomUserToRoom(roomOperationDto.RoomId, roomOperationDto.RoomUserId);
+            _dbContext.Room_RoomUser.Add(roomRoomUser);
+            _dbContext.SaveChanges();
         }
 
-        public void LeaveRoom(RoomOperationDto roomOperationDto)
+        public void LeaveRoom(Room_RoomUser roomRoomUser)
         {
-            _dbContext.RemoveRoomUserFromRoom(roomOperationDto.RoomId, roomOperationDto.RoomUserId);
+            _dbContext.Room_RoomUser.Remove(roomRoomUser);
+            _dbContext.SaveChanges();
         }
 
         public List<Room> GetRoom(int roomUserId)

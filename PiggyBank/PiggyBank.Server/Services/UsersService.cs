@@ -72,6 +72,8 @@ namespace PiggyBank.Server.Services
                     RoomUserId = roomUser.Id
                 };
 
+                _usersRepository.AddUser(user);
+
                 return true;
             }
             else

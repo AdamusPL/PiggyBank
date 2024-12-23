@@ -30,7 +30,7 @@ namespace PiggyBank.Server.Controllers
         }
 
         [HttpPost("create", Name = "CreateRoom")]
-        public IActionResult CreateRoom([FromBody] Room room) {
+        public IActionResult CreateRoom([FromBody] NewRoomDto room) {
             _roomsService.CreateRoom(room);
             return Ok(new { message = "Successfully created room" });
         }

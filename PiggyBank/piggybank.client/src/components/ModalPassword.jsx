@@ -59,16 +59,16 @@ export default function ModalPassword({ room, setUserRooms }) {
             Join
         </button>
         <dialog id="modal-password" open={isOpened}>
-            <div class="close-modal">
-                <button class="btn btn-primary rounded-circle p-2 lh-1" type="button" onClick={closeModal}>
+            <div className="close-modal">
+                <button className="btn btn-primary rounded-circle p-2 lh-1" type="button" onClick={closeModal}>
                     X
-                    <span class="visually-hidden">Dismiss</span>
+                    <span className="visually-hidden">Dismiss</span>
                 </button>
             </div>
             <p>Please enter password:</p>
             <input id="room-password" type="password" defaultValue={roomPassword} onChange={(e) => setRoomPassword(e.target.value)}></input>
             <div id="center">
-                <button id="confirm-password" class="btn btn-outline-secondary" onClick={checkPasswordToRoom}>Enter</button>
+                <button id="confirm-password" className="btn btn-outline-secondary" onClick={checkPasswordToRoom}>Enter</button>
             </div>
             <p>{info}</p>
         </dialog>

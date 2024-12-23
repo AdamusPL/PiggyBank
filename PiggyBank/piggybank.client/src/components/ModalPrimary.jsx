@@ -77,10 +77,10 @@ export default function ModalPrimary({ isJoined, room, setUserRooms }) {
             </button>
         }
         <dialog id="modal" open={isOpened}>
-            <div class="close-modal">
-                <button class="btn btn-primary rounded-circle p-2 lh-1" type="button" onClick={closeModal}>
+            <div className="close-modal">
+                <button className="btn btn-primary rounded-circle p-2 lh-1" type="button" onClick={closeModal}>
                     X
-                    <span class="visually-hidden">Dismiss</span>
+                    <span className="visually-hidden">Dismiss</span>
                 </button>
             </div>
             {isJoined ?

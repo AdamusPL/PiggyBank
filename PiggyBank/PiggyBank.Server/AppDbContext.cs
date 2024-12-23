@@ -19,32 +19,6 @@ namespace PiggyBank
 
         }
 
-        public void AddRoomUserToRoom(int roomId, int roomUserId)
-        {
-            var roomRoomUser = new Room_RoomUser
-            {
-                RoomId = roomId,
-                RoomUserId = roomUserId
-            };
-
-            Room_RoomUser.Add(roomRoomUser);
-
-            SaveChanges();
-        }
-
-        public void RemoveRoomUserFromRoom(int roomId, int roomUserId)
-        {
-            var roomRoomUser = new Room_RoomUser
-            {
-                RoomId = roomId,
-                RoomUserId = roomUserId
-            };
-
-            Room_RoomUser.Remove(roomRoomUser);
-
-            SaveChanges();
-        }
-
         public int AddItem(ItemDto itemDto)
         {
             Item item = new Item(itemDto.Name, itemDto.Price, itemDto.ExpenseId);
