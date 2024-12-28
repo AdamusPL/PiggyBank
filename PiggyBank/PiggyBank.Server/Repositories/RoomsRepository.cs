@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PiggyBank.Server.Dtos;
 using PiggyBank.Server.Models;
 
 namespace PiggyBank.Server.Repositories
@@ -9,9 +8,10 @@ namespace PiggyBank.Server.Repositories
         List<Room> GetRooms();
         void JoinRoom(Room_RoomUser roomRoomUser);
         void LeaveRoom(Room_RoomUser roomRoomUser);
-        List<Room_RoomUser> GetUserRooms(int userId);
+        List<Room_RoomUser> GetUserRooms(int roomUserId);
         void CreateRoom(Room room);
         List<Room> GetRoom(int roomUserId);
+        RoomUser GetRoomUser(int userId);
     }
 
     internal class RoomsRepository : IRoomsRepository
@@ -34,9 +34,9 @@ namespace PiggyBank.Server.Repositories
             return _dbContext.Room.ToList();
         }
 
-        public List<Room_RoomUser> GetUserRooms(int userId)
+        public List<Room_RoomUser> GetUserRooms(int roomUserId)
         {
-            return _dbContext.Room_RoomUser.FromSqlRaw("SELECT * FROM Room_RoomUser WHERE RoomUserId = {0}", userId).ToList();
+            return _dbContext.Room_RoomUser.FromSqlRaw("SELECT * FROM Room_RoomUser WHERE RoomUserId = {0}", roomUserId).ToList();
         }
 
         public void JoinRoom(Room_RoomUser roomRoomUser)
@@ -58,6 +58,14 @@ namespace PiggyBank.Server.Repositories
                 .Include(r => r.Expenses)
                     .ThenInclude(e => e.Items)
                 .ToList();
+        }
+
+        public RoomUser GetRoomUser(int userId)
+        {
+            var user = _dbContext.Users
+                .FirstOrDefault(u => u.Id == userId);
+
+            return user != null ? _dbContext.RoomUser.FirstOrDefault(ru => ru.Id == user.RoomUserId) : null;
         }
     }
 }

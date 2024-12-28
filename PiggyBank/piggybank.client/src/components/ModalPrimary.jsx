@@ -8,9 +8,9 @@ export default function ModalPrimary({ isJoined, room, setUserRooms }) {
 
     async function joinRoom() {
         debugger;
-        const roomUserId = JSON.parse(localStorage.getItem("user")).id;
+        const userId = JSON.parse(localStorage.getItem("user")).id;
         const object = {
-            roomUserId: roomUserId,
+            userId: userId,
             roomId: room.id
         };
         try {
@@ -35,9 +35,9 @@ export default function ModalPrimary({ isJoined, room, setUserRooms }) {
 
     async function leaveRoom() {
         debugger;
-        const roomUserId = JSON.parse(localStorage.getItem("user")).id;
+        const userId = JSON.parse(localStorage.getItem("user")).id;
         const object = {
-            roomUserId: roomUserId,
+            userId: userId,
             roomId: room.id
         };
         try {

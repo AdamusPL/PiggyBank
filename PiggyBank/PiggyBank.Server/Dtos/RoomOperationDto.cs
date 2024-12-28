@@ -2,7 +2,7 @@
 {
     public class RoomOperationDto
     {
-        public int RoomUserId { get; set; }
+        public int UserId { get; set; }
         public int RoomId { get; set; }
     }
 }

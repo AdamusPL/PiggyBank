@@ -16,10 +16,12 @@ namespace PiggyBank.Server.Services
     internal class RoomsService : IRoomsService
     {
         private readonly IRoomsRepository _roomsRepository;
+        private readonly IUsersRepository _usersRepository;
 
-        public RoomsService(IRoomsRepository roomsRepository)
+        public RoomsService(IRoomsRepository roomsRepository, IUsersRepository usersRepository)
         {
             _roomsRepository = roomsRepository;
+            _usersRepository = usersRepository;
         }
 
         public List<Room> GetRooms()
@@ -29,20 +31,22 @@ namespace PiggyBank.Server.Services
 
         public void JoinRoom(RoomOperationDto roomOperationDto)
         {
+            RoomUser roomUser = _roomsRepository.GetRoomUser(roomOperationDto.UserId);
             var roomRoomUser = new Room_RoomUser
             {
                 RoomId = roomOperationDto.RoomId,
-                RoomUserId = roomOperationDto.RoomUserId
+                RoomUserId = roomUser.Id
             };
             _roomsRepository.JoinRoom(roomRoomUser);
         }
 
         public void LeaveRoom(RoomOperationDto roomOperationDto)
         {
+            RoomUser roomUser = _roomsRepository.GetRoomUser(roomOperationDto.UserId);
             var roomRoomUser = new Room_RoomUser
             {
                 RoomId = roomOperationDto.RoomId,
-                RoomUserId = roomOperationDto.RoomUserId
+                RoomUserId = roomUser.Id
             };
 
             _roomsRepository.LeaveRoom(roomRoomUser);
@@ -50,7 +54,8 @@ namespace PiggyBank.Server.Services
 
         public List<Room_RoomUser> GetUserRooms(int userId)
         {
-            return _roomsRepository.GetUserRooms(userId);
+            RoomUser roomUser = _roomsRepository.GetRoomUser(userId);
+            return _roomsRepository.GetUserRooms(roomUser.Id);
         }
 
         public void CreateRoom(NewRoomDto room)
