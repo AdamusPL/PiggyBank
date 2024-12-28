@@ -6,8 +6,17 @@ export default function ModalPassword({ room, setUserRooms }) {
     const [info, setInfo] = useState("");
 
     async function checkPasswordToRoom() {
+        const response = await fetch('rooms/checkPassword', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ RoomPassword: room.password, Salt: room.salt, PasswordEnteredByUser:  roomPassword}),
+        });
+
         debugger;
-        if (room.password === roomPassword) {
+
+        if (response.ok) {
             joinRoomWithPassword();
             setInfo("Successfully joined the room");
             setUserRooms(prevUserRooms => [...prevUserRooms, { roomId: room.id }]);
@@ -15,6 +24,7 @@ export default function ModalPassword({ room, setUserRooms }) {
         else {
             setInfo("Wrong password!");
         }
+
     }
 
     function closeModal() {
@@ -26,19 +36,14 @@ export default function ModalPassword({ room, setUserRooms }) {
     }
 
     async function joinRoomWithPassword() {
-        const roomUserId = JSON.parse(localStorage.getItem("user")).id
-        const roomUser = {
-            Id: roomUserId,
-            FirstName: "Marek",
-            Surname: "Lesny"
-        };
+        const user = JSON.parse(localStorage.getItem("user"));
         try {
             const response = await fetch('rooms/join', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ RoomId: room.id, Room: room, RoomUserId: roomUserId, RoomUser: roomUser }),
+                body: JSON.stringify({ RoomId: room.id, UserId: user.id }),
             });
 
             if (response.ok) {

@@ -1,5 +1,6 @@
 ﻿using PiggyBank.Repositories;
 using PiggyBank.Server.Dtos;
+using PiggyBank.Server.Models;
 using PiggyBank.Server.Repositories;
 
 namespace PiggyBank.Services
@@ -23,11 +24,12 @@ namespace PiggyBank.Services
             _roomsRepository = roomsRepository;
         }
 
-        public List<RoomPrintDto> GetRoomExpenses(int roomUserId)
+        public List<RoomPrintDto> GetRoomExpenses(int userId)
         {
+            RoomUser roomUser = _roomsRepository.GetRoomUser(userId);
             List<RoomPrintDto> list = new List<RoomPrintDto>();
 
-            var rooms = _roomsRepository.GetRoom(roomUserId);
+            var rooms = _roomsRepository.GetRoom(roomUser.Id);
 
             foreach (var room in rooms)
             {

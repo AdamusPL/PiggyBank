@@ -12,6 +12,7 @@ namespace PiggyBank.Server.Services
         void LeaveRoom(RoomOperationDto roomOperationDto);
         List<Room_RoomUser> GetUserRooms(int userId);
         void CreateRoom(NewRoomDto room);
+        bool CheckPassword(PasswordDto passwordDto);
     }
     internal class RoomsService : IRoomsService
     {
@@ -28,7 +29,7 @@ namespace PiggyBank.Server.Services
         {
             return _roomsRepository.GetRooms();
         }
-
+        
         public void JoinRoom(RoomOperationDto roomOperationDto)
         {
             RoomUser roomUser = _roomsRepository.GetRoomUser(roomOperationDto.UserId);
@@ -80,6 +81,19 @@ namespace PiggyBank.Server.Services
                 };
             }
             _roomsRepository.CreateRoom(room1);
+        }
+
+        public bool CheckPassword(PasswordDto passwordDto)
+        {
+            string pwd = PasswordManager.CheckPassword(passwordDto.PasswordEnteredByUser, passwordDto.Salt);
+            if (pwd == passwordDto.RoomPassword)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

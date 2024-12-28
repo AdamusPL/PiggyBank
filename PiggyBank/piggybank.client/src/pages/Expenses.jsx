@@ -19,9 +19,10 @@ export function Expenses() {
         const data = await response.json();
 
         setUserRooms(data);
+        console.log(data);
     }
 
-    async function handleSubmitItem(roomId, expenseId, item) {
+    async function handleSubmitItem(expenseId, item) {
         try {
             const itemToAdd = {
                 Name: item.name,
@@ -43,12 +44,12 @@ export function Expenses() {
         }
     };
 
-    function handleFormItemSubmit(roomId, expenseId) {
+    function handleFormItemSubmit(expenseId) {
         const item = {
             name: itemName,
             price: itemPrice
         };
-        handleSubmitItem(roomId, expenseId, item);
+        handleSubmitItem(expenseId, item);
     };
 
     async function handleSubmitExpense(roomId, expense) {
@@ -176,7 +177,7 @@ export function Expenses() {
 
                                             <h3>Add new item</h3>
                                             <div className="new-items">
-                                                <form className="item-form" onSubmit={() => handleFormItemSubmit(room.id, expense.id)}>
+                                                <form className="item-form" onSubmit={() => handleFormItemSubmit(expense.id)}>
                                                     <p>Name</p>
                                                     <input type="search" onChange={(e) => setItemName(e.target.value)} />
                                                     <p>Price</p>

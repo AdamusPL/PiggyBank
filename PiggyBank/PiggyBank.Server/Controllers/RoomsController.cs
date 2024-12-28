@@ -46,5 +46,19 @@ namespace PiggyBank.Server.Controllers
             _roomsService.LeaveRoom(roomOperationDto);
             return Ok(new { message = "Successfully joined room" });
         }
+
+        [HttpPost("checkPassword", Name = "CheckRoomPassword")]
+        public IActionResult CheckPassword([FromBody] PasswordDto passwordDto)
+        {
+            bool isCorrect = _roomsService.CheckPassword(passwordDto);
+            if (isCorrect)
+            {
+                return Ok();
+            }
+            else
+            {
+                return Forbid();
+            }
+        }
     }
 }
