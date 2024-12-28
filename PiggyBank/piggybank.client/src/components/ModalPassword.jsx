@@ -6,6 +6,7 @@ export default function ModalPassword({ room, setUserRooms }) {
     const [info, setInfo] = useState("");
 
     async function checkPasswordToRoom() {
+        debugger;
         if (room.password === roomPassword) {
             joinRoomWithPassword();
             setInfo("Successfully joined the room");
@@ -17,7 +18,6 @@ export default function ModalPassword({ room, setUserRooms }) {
     }
 
     function closeModal() {
-        ;
         setIsOpened(false);
     }
 

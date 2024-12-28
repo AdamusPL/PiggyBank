@@ -1,6 +1,4 @@
-﻿using PiggyBank.Server.Models;
-
-namespace PiggyBank.Server.Dtos
+﻿namespace PiggyBank.Server.Dtos
 {
     public class RoomPrintDto
     {

@@ -21,16 +21,13 @@ export function Rooms() {
     }
 
     async function populateUserRoomsData() {
-        debugger;
         const userId = JSON.parse(localStorage.getItem('user')).id;
         const response = await fetch(`rooms/GetUserRooms?userId=${userId}`);
         const data = await response.json();
         setUserRooms(data);
-        console.log(data);
     }
 
     async function handleCreateRoom() {
-        debugger;
         const room = {
             name: roomName,
             password: password
@@ -45,11 +42,6 @@ export function Rooms() {
                 body: JSON.stringify(room),
             });
 
-            if (response.ok) {
-                console.log("Room created");
-            } else {
-                console.error('Failed to join room');
-            }
         } catch (error) {
             console.error('Error:', error);
         }

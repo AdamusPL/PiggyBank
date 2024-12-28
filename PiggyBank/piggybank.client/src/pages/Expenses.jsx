@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import '../css/Expenses.css';
 import { React } from 'react';
 
@@ -19,7 +19,6 @@ export function Expenses() {
         const data = await response.json();
 
         setUserRooms(data);
-        console.log(data);
     }
 
     async function handleSubmitItem(roomId, expenseId, item) {
@@ -74,7 +73,6 @@ export function Expenses() {
     };
 
     function handleFormExpenseSubmit(roomId) {
-        debugger;
         const expense = {
             name: expenseName,
             purchaseDate: purchaseDate
@@ -87,8 +85,6 @@ export function Expenses() {
             const response = await fetch(`items/RemoveItem?itemId=${itemId}`, {
                 method: 'POST'
             });
-
-            console.log(userRooms);
 
             setUserRooms((prevRooms) =>
                 prevRooms.map((room) => {
